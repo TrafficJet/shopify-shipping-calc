@@ -6,6 +6,8 @@ description: "Learn how to offer free shipping on Shopify while protecting margi
 author: "Alex Morgan"
 tags: ["How to Offer Free Shipping on Shopify Without Losing Money"]
 seoTitle: "Free Shipping on Shopify Without Losing Money | 2026 Guide"
+heroImage: "/images/how-to-offer-free-shipping-on-shopify-without-losing-money/hero.jpg"
+heroImageAlt: "Shopify store owner calculating shipping costs with boxes and packaging materials on workspace"
 ---
 
 # Free Shipping on Shopify Without Losing Money (2026)
