@@ -2,32 +2,52 @@
 import Base from '../layouts/Base.astro';
 ---
 <Base
-  title="Shopify Shipping Calculator — Free Rate Tools for Sellers"
-  description="Free shipping calculators for Shopify sellers: estimate USPS, UPS & FedEx rates, set the perfect free shipping threshold, and cut shipping costs."
+  title="Shopify Shipping Calculator — Free Tools for Sellers"
+  description="Free Shopify shipping calculators: compare USPS, UPS, FedEx & DHL rates, calculate dimensional weight, find free shipping thresholds. No signup required."
 >
   <section class="text-center py-12">
     <h1 class="text-4xl font-bold mb-4">Free Shopify Shipping Tools</h1>
-    <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-      Accurate shipping calculators built for Shopify sellers. No login required.
+    <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+      Calculate shipping costs, compare carriers, and find the right free shipping threshold for your Shopify store.
     </p>
   </section>
 
   <section class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-    <a href="/shipping-calculator/" class="block border rounded-xl p-6 hover:shadow-md transition">
-      <h2 class="text-xl font-semibold mb-2">Shipping Rate Calculator</h2>
-      <p class="text-gray-600 text-sm">Compare USPS, UPS, and FedEx rates by weight, dimensions, and destination ZIP.</p>
+    <a href="/shipping/" class="block border-2 border-teal-400 dark:border-teal-600 bg-teal-50 dark:bg-teal-950 rounded-xl p-6 hover:shadow-md transition md:col-span-2">
+      <div class="text-xs font-medium text-teal-700 dark:text-teal-400 uppercase tracking-wide mb-1">280+ Cities — All Carriers</div>
+      <h2 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">Shipping Rates by City</h2>
+      <p class="text-gray-600 dark:text-gray-400 text-sm">Compare USPS, UPS, FedEx, and DHL rates from any US city to any destination. Side-by-side price comparison across all service levels.</p>
     </a>
-    <a href="/free-shipping-threshold/" class="block border rounded-xl p-6 hover:shadow-md transition">
-      <h2 class="text-xl font-semibold mb-2">Free Shipping Threshold</h2>
-      <p class="text-gray-600 text-sm">Find the optimal free shipping minimum to boost AOV without killing margins.</p>
+    <a href="/dimensional-weight/" class="block border-2 border-blue-400 dark:border-blue-600 bg-blue-50 dark:bg-blue-950 rounded-xl p-6 hover:shadow-md transition">
+      <div class="text-xs font-medium text-blue-700 dark:text-blue-400 uppercase tracking-wide mb-1">New</div>
+      <h2 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">Dimensional Weight Calculator</h2>
+      <p class="text-gray-600 dark:text-gray-400 text-sm">Calculate DIM weight for USPS, UPS, FedEx, and DHL. See which weight — actual or dimensional — you'll actually be billed for.</p>
     </a>
-    <a href="/blog/" class="block border rounded-xl p-6 hover:shadow-md transition">
-      <h2 class="text-xl font-semibold mb-2">Shipping Guides</h2>
-      <p class="text-gray-600 text-sm">In-depth guides on Shopify shipping zones, carrier rates, and fulfillment strategy.</p>
+    <a href="/free-shipping-threshold/" class="block border-2 border-green-400 dark:border-green-600 bg-green-50 dark:bg-green-950 rounded-xl p-6 hover:shadow-md transition">
+      <div class="text-xs font-medium text-green-700 dark:text-green-400 uppercase tracking-wide mb-1">Popular</div>
+      <h2 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">Free Shipping Threshold Calculator</h2>
+      <p class="text-gray-600 dark:text-gray-400 text-sm">Find the optimal minimum order value that covers your shipping cost without hurting margin. Boost AOV the right way.</p>
     </a>
-    <a href="/about/" class="block border rounded-xl p-6 hover:shadow-md transition">
-      <h2 class="text-xl font-semibold mb-2">About ShippingCalc</h2>
-      <p class="text-gray-600 text-sm">Built by Shopify sellers, for Shopify sellers. Free forever.</p>
+    <a href="/carrier-comparison/" class="block border dark:border-gray-700 rounded-xl p-6 hover:shadow-md transition">
+      <h2 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">Carrier Comparison</h2>
+      <p class="text-gray-600 dark:text-gray-400 text-sm">USPS vs UPS vs FedEx vs DHL — side-by-side rates, delivery times, and which carrier wins for your package size and zone.</p>
+    </a>
+    <a href="/china-shipping/" class="block border border-purple-200 dark:border-purple-800 bg-purple-50 dark:bg-purple-950 rounded-xl p-6 hover:shadow-md transition">
+      <div class="text-xs font-medium text-purple-600 dark:text-purple-400 uppercase tracking-wide mb-1">50 Countries</div>
+      <h2 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">China Shipping Rates</h2>
+      <p class="text-gray-600 dark:text-gray-400 text-sm">ePacket, DHL, FedEx International rates from China to 50+ countries. 2026 rates for dropshipping and sourcing.</p>
+    </a>
+    <a href="/shipping-calculator/" class="block border dark:border-gray-700 rounded-xl p-6 hover:shadow-md transition">
+      <h2 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">Shipping Rate Calculator</h2>
+      <p class="text-gray-600 dark:text-gray-400 text-sm">Estimate USPS, UPS, and FedEx costs by weight and destination zip code. Quick lookup for any package size.</p>
+    </a>
+    <a href="/profit-margin/" class="block border dark:border-gray-700 rounded-xl p-6 hover:shadow-md transition">
+      <h2 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">Profit Margin Calculator</h2>
+      <p class="text-gray-600 dark:text-gray-400 text-sm">Calculate net margin after COGS, Shopify fees, payment processing, and shipping costs combined.</p>
+    </a>
+    <a href="/break-even/" class="block border dark:border-gray-700 rounded-xl p-6 hover:shadow-md transition">
+      <h2 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">Break-Even Calculator</h2>
+      <p class="text-gray-600 dark:text-gray-400 text-sm">Find the minimum units needed to cover fixed and variable costs including shipping.</p>
     </a>
   </section>
 </Base>

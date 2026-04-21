@@ -6,9 +6,10 @@ description: "Learn how to offer free shipping on Shopify while protecting margi
 author: "Alex Morgan"
 tags: ["How to Offer Free Shipping on Shopify Without Losing Money"]
 seoTitle: "Free Shipping on Shopify Without Losing Money | 2026 Guide"
-heroImage: "/images/how-to-offer-free-shipping-on-shopify-without-losing-money/hero.jpg"
-heroImageAlt: "Shopify store owner calculating shipping costs with boxes and packaging materials on workspace"
 ---
+
+# Free Shipping on Shopify Without Losing Money (2026)
+
 Unexpected shipping costs are the #1 reason shoppers abandon carts. They cause 48% of all cart abandonment in the US (Source: Baymard Institute, 2026). You already know you should offer free shipping. The real question is how to do it without destroying your margins.
 
 This guide gives you a step-by-step system to fund free shipping — not gift it. Think of it as a margin management problem, not a marketing trick. Every tactic below includes real math so you can adapt it to your own Shopify store.

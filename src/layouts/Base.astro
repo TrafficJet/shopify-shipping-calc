@@ -3,19 +3,21 @@ interface Props {
   title: string;
   description: string;
   canonicalUrl?: string;
-  noindex?: boolean;
   ogImage?: string;
+  noWebAppSchema?: boolean;
 }
-const { title, description, canonicalUrl, noindex, ogImage } = Astro.props;
+const { title, description, canonicalUrl, ogImage, noWebAppSchema } = Astro.props;
 const canon = canonicalUrl || Astro.url.href;
-const GA_ID = 'G-PLACEHOLDER';
+const finalOgImage = ogImage || 'https://shopify-shipping-calc.com/og-default.png';
+const GA_ID = 'G-XXXXXXXXXX'; // TODO: replace with your GA4 property ID for shopify-shipping-calc.com
+const webAppSchemaJson = JSON.stringify({"@context":"https://schema.org","@type":"WebApplication","name":"Shopify Shipping Calculator","url":"https://shopify-shipping-calc.com/","description":"Free Shopify shipping calculator. Compare USPS, UPS, FedEx, and DHL rates. Calculate dimensional weight, free shipping thresholds, and carrier costs for your store.","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}});
 ---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0ea5e9" />
+  <meta name="theme-color" content="#0d9488" />
   <title>{title}</title>
   <meta name="description" content={description} />
   <link rel="canonical" href={canon} />
@@ -26,38 +28,75 @@ const GA_ID = 'G-PLACEHOLDER';
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
-  {ogImage && <meta property="og:image" content={ogImage} />}
-  {ogImage && <meta name="twitter:image" content={ogImage} />}
+  <meta property="og:image" content={finalOgImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:image" content={finalOgImage} />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="preconnect" href="https://www.googletagmanager.com" />
   <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-  {noindex && <meta name="robots" content="noindex, follow" />}
+  <slot name="head" />
+  {!noWebAppSchema && <script type="application/ld+json" set:html={webAppSchemaJson} />}
+  <script is:inline>
+    (function() {
+      var saved = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (saved === 'dark' || (!saved && prefersDark)) {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
 </head>
-<body class="bg-white text-gray-900 font-sans">
-  <header class="border-b border-gray-200 px-6 py-4">
+<body class="bg-white text-gray-900 font-sans dark:bg-gray-950 dark:text-gray-100 transition-colors duration-200">
+  <header class="border-b border-gray-200 dark:border-gray-800 px-6 py-4 bg-white dark:bg-gray-950">
     <nav class="max-w-5xl mx-auto flex items-center justify-between">
-      <a href="/" class="text-lg font-bold text-sky-600">ShippingCalc</a>
-      <ul class="flex gap-6 text-sm text-gray-600">
-        <li><a href="/shipping-calculator/" class="hover:text-sky-600">Shipping Calc</a></li>
-        <li><a href="/free-shipping-threshold/" class="hover:text-sky-600">Free Shipping</a></li>
-        <li><a href="/blog/" class="hover:text-sky-600">Blog</a></li>
-        <li><a href="/about/" class="hover:text-sky-600">About</a></li>
+      <a href="/" class="text-lg font-bold text-teal-700 dark:text-teal-400">ShipCalc</a>
+      <ul class="flex gap-5 text-sm text-gray-600 dark:text-gray-400 flex-wrap items-center">
+        <li><a href="/shipping/" class="hover:text-teal-700 dark:hover:text-teal-400">By City</a></li>
+        <li><a href="/china-shipping/" class="hover:text-teal-700 dark:hover:text-teal-400">China Shipping</a></li>
+        <li><a href="/shipping-calculator/" class="hover:text-teal-700 dark:hover:text-teal-400">Rate Calc</a></li>
+        <li><a href="/dimensional-weight/" class="hover:text-teal-700 dark:hover:text-teal-400">DIM Weight</a></li>
+        <li><a href="/free-shipping-threshold/" class="hover:text-teal-700 dark:hover:text-teal-400">Free Shipping</a></li>
+        <li><a href="/carrier-comparison/" class="hover:text-teal-700 dark:hover:text-teal-400">Carriers</a></li>
+        <li><a href="/blog/" class="hover:text-teal-700 dark:hover:text-teal-400">Blog</a></li>
+        <li>
+          <button id="theme-toggle" aria-label="Toggle dark mode"
+            class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+            <svg id="icon-sun" class="hidden w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
+            </svg>
+            <svg id="icon-moon" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+            </svg>
+          </button>
+        </li>
       </ul>
     </nav>
   </header>
+
   <main class="max-w-5xl mx-auto px-6 py-10">
     <slot />
   </main>
-  <footer class="border-t border-gray-200 px-6 py-8 mt-16 text-sm text-gray-500">
-    <div class="max-w-5xl mx-auto flex flex-wrap justify-between gap-4">
-      <span>&copy; {new Date().getFullYear()} ShippingCalc. Independent resource &mdash; not affiliated with Shopify Inc.</span>
-      <ul class="flex gap-4">
-        <li><a href="/about/" class="hover:text-sky-600">About</a></li>
-        <li><a href="/privacy/" class="hover:text-sky-600">Privacy</a></li>
-        <li><a href="/terms/" class="hover:text-sky-600">Terms</a></li>
-        <li><a href="/contact/" class="hover:text-sky-600">Contact</a></li>
-      </ul>
+
+  <footer class="border-t border-gray-200 dark:border-gray-800 px-6 py-8 mt-16 text-sm text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-950">
+    <div class="max-w-5xl mx-auto">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
+        <span>© {new Date().getFullYear()} ShipCalc — independent tool, not affiliated with Shopify Inc., USPS, UPS, FedEx, or DHL.</span>
+        <ul class="flex gap-4 shrink-0">
+          <li><a href="/privacy/" class="hover:text-teal-700 dark:hover:text-teal-400">Privacy</a></li>
+          <li><a href="/terms/" class="hover:text-teal-700 dark:hover:text-teal-400">Terms</a></li>
+          <li><a href="/about/" class="hover:text-teal-700 dark:hover:text-teal-400">About</a></li>
+        </ul>
+      </div>
+      <p class="text-xs text-gray-400 dark:text-gray-500 leading-relaxed">
+        Shipping rates shown on this site are approximate estimates based on publicly available carrier schedules and are provided for informational purposes only.
+        Always verify current rates at <a href="https://www.usps.com" target="_blank" rel="noopener nofollow" class="hover:text-teal-600">usps.com</a>,
+        <a href="https://www.ups.com" target="_blank" rel="noopener nofollow" class="hover:text-teal-600">ups.com</a>,
+        <a href="https://www.fedex.com" target="_blank" rel="noopener nofollow" class="hover:text-teal-600">fedex.com</a>, or
+        <a href="https://www.dhl.com" target="_blank" rel="noopener nofollow" class="hover:text-teal-600">dhl.com</a>
+        before shipping. Shopify® is a registered trademark of Shopify Inc. UPS® is a trademark of United Parcel Service, Inc. FedEx® is a trademark of Federal Express Corp. DHL® is a trademark of Deutsche Post AG.
+      </p>
     </div>
   </footer>
   <script defer src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
@@ -66,6 +105,27 @@ const GA_ID = 'G-PLACEHOLDER';
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', GA_ID);
+  </script>
+  <script is:inline>
+    (function() {
+      var btn = document.getElementById('theme-toggle');
+      var sun = document.getElementById('icon-sun');
+      var moon = document.getElementById('icon-moon');
+
+      function syncIcons() {
+        var isDark = document.documentElement.classList.contains('dark');
+        sun.classList.toggle('hidden', !isDark);
+        moon.classList.toggle('hidden', isDark);
+      }
+
+      syncIcons();
+
+      btn.addEventListener('click', function() {
+        var isDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        syncIcons();
+      });
+    })();
   </script>
 </body>
 </html>

@@ -1,0 +1,409 @@
+---
+import Base from '../layouts/Base.astro';
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Shopify Carrier Comparison Tool",
+  "description": "Compare USPS vs UPS vs FedEx vs DHL shipping rates and transit times for Shopify sellers. Find the cheapest carrier for your package weight in 2026.",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+});
+---
+<Base
+  title="Shopify Carrier Comparison: USPS vs UPS vs FedEx vs DHL (2026)"
+  description="Compare USPS, UPS, FedEx, and DHL shipping rates side by side for your Shopify store. Enter package weight to see estimated costs, transit times, and which carrier wins for each package size."
+  noWebAppSchema={true}
+>
+  <script type="application/ld+json" set:html={schema} />
+
+  <h1 class="text-3xl font-bold mb-2">Shopify Carrier Comparison: USPS vs UPS vs FedEx vs DHL</h1>
+  <p class="text-gray-600 dark:text-gray-400 mb-8">Enter your package details to see estimated rates and transit times side by side. Find the cheapest carrier for your Shopify shipments in 2026.</p>
+
+  <!-- Input panel -->
+  <div class="bg-gray-50 dark:bg-gray-900 border dark:border-gray-700 rounded-xl p-6 max-w-2xl mb-8">
+    <form id="compare-form" class="space-y-5">
+      <div>
+        <label for="weight" class="block text-sm font-medium mb-1 dark:text-gray-300">Package Weight (lbs)</label>
+        <input
+          id="weight"
+          type="number"
+          min="0.1"
+          max="150"
+          step="0.1"
+          placeholder="e.g. 2.5"
+          required
+          class="w-full border dark:border-gray-600 rounded-lg px-4 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-500"
+        />
+      </div>
+
+      <fieldset>
+        <legend class="block text-sm font-medium mb-2 dark:text-gray-300">Package Size</legend>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2" id="size-radios">
+          <label class="size-label flex items-center gap-2 border dark:border-gray-600 rounded-lg px-3 py-2 cursor-pointer bg-white dark:bg-gray-800 hover:border-teal-500 transition-colors has-[:checked]:border-teal-600 has-[:checked]:bg-teal-50 dark:has-[:checked]:bg-teal-950 dark:has-[:checked]:border-teal-400">
+            <input type="radio" name="pkg_type" value="small" class="accent-teal-600" />
+            <span class="text-sm">Small<br/><span class="text-xs text-gray-500 dark:text-gray-400">≤ 1 lb</span></span>
+          </label>
+          <label class="size-label flex items-center gap-2 border dark:border-gray-600 rounded-lg px-3 py-2 cursor-pointer bg-white dark:bg-gray-800 hover:border-teal-500 transition-colors has-[:checked]:border-teal-600 has-[:checked]:bg-teal-50 dark:has-[:checked]:bg-teal-950 dark:has-[:checked]:border-teal-400">
+            <input type="radio" name="pkg_type" value="medium" class="accent-teal-600" />
+            <span class="text-sm">Medium<br/><span class="text-xs text-gray-500 dark:text-gray-400">1 – 5 lbs</span></span>
+          </label>
+          <label class="size-label flex items-center gap-2 border dark:border-gray-600 rounded-lg px-3 py-2 cursor-pointer bg-white dark:bg-gray-800 hover:border-teal-500 transition-colors has-[:checked]:border-teal-600 has-[:checked]:bg-teal-50 dark:has-[:checked]:bg-teal-950 dark:has-[:checked]:border-teal-400">
+            <input type="radio" name="pkg_type" value="large" class="accent-teal-600" />
+            <span class="text-sm">Large<br/><span class="text-xs text-gray-500 dark:text-gray-400">5 – 20 lbs</span></span>
+          </label>
+          <label class="size-label flex items-center gap-2 border dark:border-gray-600 rounded-lg px-3 py-2 cursor-pointer bg-white dark:bg-gray-800 hover:border-teal-500 transition-colors has-[:checked]:border-teal-600 has-[:checked]:bg-teal-50 dark:has-[:checked]:bg-teal-950 dark:has-[:checked]:border-teal-400">
+            <input type="radio" name="pkg_type" value="freight" class="accent-teal-600" />
+            <span class="text-sm">Freight<br/><span class="text-xs text-gray-500 dark:text-gray-400">20 + lbs</span></span>
+          </label>
+        </div>
+      </fieldset>
+
+      <button
+        type="submit"
+        class="w-full bg-teal-600 hover:bg-teal-700 dark:bg-teal-700 dark:hover:bg-teal-600 text-white py-3 rounded-lg font-semibold transition-colors"
+      >
+        Compare Carriers
+      </button>
+    </form>
+  </div>
+
+  <!-- Result cards -->
+  <div id="results" class="hidden">
+    <div id="cards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8"></div>
+
+    <!-- Comparison table -->
+    <div class="overflow-x-auto mb-8">
+      <table class="w-full text-sm border-collapse">
+        <thead>
+          <tr class="bg-gray-100 dark:bg-gray-800">
+            <th class="text-left px-4 py-3 font-semibold text-gray-700 dark:text-gray-300 rounded-tl-lg">Feature</th>
+            <th class="px-4 py-3 font-semibold text-gray-700 dark:text-gray-300">📬 USPS</th>
+            <th class="px-4 py-3 font-semibold text-gray-700 dark:text-gray-300">📦 UPS</th>
+            <th class="px-4 py-3 font-semibold text-gray-700 dark:text-gray-300">🟣 FedEx</th>
+            <th class="px-4 py-3 font-semibold text-gray-700 dark:text-gray-300 rounded-tr-lg">🟡 DHL</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+          <tr class="bg-white dark:bg-gray-900">
+            <td class="px-4 py-3 font-medium text-gray-700 dark:text-gray-300">Tracking included</td>
+            <td class="px-4 py-3 text-center text-green-600 dark:text-green-400 font-semibold">✓ Yes</td>
+            <td class="px-4 py-3 text-center text-green-600 dark:text-green-400 font-semibold">✓ Yes</td>
+            <td class="px-4 py-3 text-center text-green-600 dark:text-green-400 font-semibold">✓ Yes</td>
+            <td class="px-4 py-3 text-center text-green-600 dark:text-green-400 font-semibold">✓ Yes</td>
+          </tr>
+          <tr class="bg-gray-50 dark:bg-gray-800/50">
+            <td class="px-4 py-3 font-medium text-gray-700 dark:text-gray-300">Insurance included</td>
+            <td class="px-4 py-3 text-center text-gray-600 dark:text-gray-400">$100 (Priority)</td>
+            <td class="px-4 py-3 text-center text-gray-600 dark:text-gray-400">$100</td>
+            <td class="px-4 py-3 text-center text-gray-600 dark:text-gray-400">$100</td>
+            <td class="px-4 py-3 text-center text-gray-600 dark:text-gray-400">Limited</td>
+          </tr>
+          <tr class="bg-white dark:bg-gray-900">
+            <td class="px-4 py-3 font-medium text-gray-700 dark:text-gray-300">Max weight</td>
+            <td class="px-4 py-3 text-center text-gray-600 dark:text-gray-400">70 lbs</td>
+            <td class="px-4 py-3 text-center text-gray-600 dark:text-gray-400">150 lbs</td>
+            <td class="px-4 py-3 text-center text-gray-600 dark:text-gray-400">150 lbs</td>
+            <td class="px-4 py-3 text-center text-gray-600 dark:text-gray-400">154 lbs</td>
+          </tr>
+          <tr class="bg-gray-50 dark:bg-gray-800/50">
+            <td class="px-4 py-3 font-medium text-gray-700 dark:text-gray-300">Best for</td>
+            <td class="px-4 py-3 text-center text-gray-600 dark:text-gray-400">Small / lightweight</td>
+            <td class="px-4 py-3 text-center text-gray-600 dark:text-gray-400">Heavy / large</td>
+            <td class="px-4 py-3 text-center text-gray-600 dark:text-gray-400">Heavy / express</td>
+            <td class="px-4 py-3 text-center text-gray-600 dark:text-gray-400">Medium / international</td>
+          </tr>
+          <tr class="bg-white dark:bg-gray-900">
+            <td class="px-4 py-3 font-medium text-gray-700 dark:text-gray-300">Shopify discount?</td>
+            <td class="px-4 py-3 text-center text-teal-700 dark:text-teal-400 font-semibold">Up to 88%</td>
+            <td class="px-4 py-3 text-center text-teal-700 dark:text-teal-400 font-semibold">Up to 55%</td>
+            <td class="px-4 py-3 text-center text-teal-700 dark:text-teal-400 font-semibold">Up to 55%</td>
+            <td class="px-4 py-3 text-center text-teal-700 dark:text-teal-400 font-semibold">Up to 67%</td>
+          </tr>
+          <tr class="bg-gray-50 dark:bg-gray-800/50 rounded-b-lg">
+            <td class="px-4 py-3 font-medium text-gray-700 dark:text-gray-300 rounded-bl-lg">Saturday delivery</td>
+            <td class="px-4 py-3 text-center text-green-600 dark:text-green-400 font-semibold">✓ Yes</td>
+            <td class="px-4 py-3 text-center text-gray-500 dark:text-gray-400">Extra fee</td>
+            <td class="px-4 py-3 text-center text-gray-500 dark:text-gray-400">Extra fee</td>
+            <td class="px-4 py-3 text-center text-green-600 dark:text-green-400 font-semibold">✓ Yes</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="text-xs text-gray-500 dark:text-gray-400 mb-12">
+      * Rates are 2026 estimates based on published carrier schedules before Shopify discounts. Actual rates depend on package dimensions, surcharges, delivery zone, and your Shopify plan. Enable carrier-calculated rates in Shopify Admin → Settings → Shipping and delivery for real-time quotes.
+    </p>
+  </div>
+
+  <!-- SEO content -->
+  <section class="prose dark:prose-invert max-w-2xl">
+    <h2>Which Carrier Is Cheapest for Shopify Shipping in 2026?</h2>
+    <p>
+      The answer depends almost entirely on package weight and how fast you need delivery. Here is the quick breakdown Shopify merchants use as a starting point:
+    </p>
+    <ul>
+      <li><strong>Small and lightweight packages (under 1 lb):</strong> USPS wins by a significant margin. First Class Mail starts around $4–6 and Ground Advantage around $5–8. UPS and FedEx rarely compete below $10 for sub-pound parcels because their minimums are higher.</li>
+      <li><strong>Medium packages (1–5 lbs):</strong> DHL eCommerce often edges out USPS at $7–11, followed by USPS Ground Advantage at $8–12. UPS and FedEx range from $11–18. If you are shipping regionally, USPS can still win at the low end of this tier.</li>
+      <li><strong>Large packages (5–20 lbs):</strong> UPS and FedEx become more competitive, with ground rates running $18–35. DHL eCommerce is strong here too at $15–28. USPS Priority Mail can run $20–40 and loses its cost advantage at heavier weights.</li>
+      <li><strong>Freight (20 lbs+):</strong> UPS and FedEx freight pricing is more structured and generally better than USPS for heavy ground shipments. DHL eCommerce still competes well on domestic freight. USPS becomes the least cost-effective option over 20 lbs.</li>
+    </ul>
+    <p>
+      One important note: these are <em>retail</em> rate estimates. Shopify Shipping gives you pre-negotiated discounts—up to 88% off USPS retail rates, up to 55% off UPS and FedEx, and up to 67% off DHL—so the effective costs in your Shopify dashboard will be noticeably lower.
+    </p>
+
+    <h2>Shopify Carrier Discounts Available</h2>
+    <p>
+      Shopify Shipping is built into every Shopify plan and provides access to heavily discounted carrier rates without requiring a separate carrier account. You access these rates directly in your Shopify admin when you purchase and print labels.
+    </p>
+    <p>
+      The discount tier scales with your Shopify plan:
+    </p>
+    <ul>
+      <li><strong>Basic Shopify:</strong> Discounts on USPS, UPS, and DHL rates—typically 50–77% off USPS retail.</li>
+      <li><strong>Shopify plan:</strong> Higher discounts plus access to carrier-calculated rates at checkout so customers see real-time quotes.</li>
+      <li><strong>Advanced and Shopify Plus:</strong> Maximum discount tiers and third-party carrier rate access at checkout.</li>
+    </ul>
+    <p>
+      For merchants who want to compare what they are currently paying in carrier fees against the overall Shopify fee picture, visit <a href="https://shopify-fee-calc.com" target="_blank" rel="noopener">shopify-fee-calc.com</a>—it breaks down transaction fees, payment processing fees, and plan costs so you can find the plan that actually saves you the most money overall.
+    </p>
+    <p>
+      If you are scaling volume and Shopify Shipping discounts no longer cover your needs, you can also connect third-party negotiated accounts from Pirateship, EasyPost, or ShipStation—but for most Shopify stores doing under 500 shipments a month, the built-in discounts are competitive enough that a separate account is not necessary.
+    </p>
+    <p>
+      The carrier comparison tool above uses 2026 estimated retail rates. Use it as a directional guide for which carrier to evaluate first, then confirm final rates in your Shopify Shipping dashboard or carrier portal before committing to a shipping strategy.
+    </p>
+  </section>
+
+  <script>
+    // Carrier data keyed by package size tier
+    const CARRIERS = [
+      {
+        id: 'usps',
+        emoji: '📬',
+        name: 'USPS',
+        bestFor: 'Small, lightweight packages',
+        tiers: {
+          small: {
+            service: 'First Class / Ground Advantage',
+            priceMin: 4,
+            priceMax: 8,
+            transit: '1–5 business days',
+            winner: true,
+          },
+          medium: {
+            service: 'Ground Advantage',
+            priceMin: 8,
+            priceMax: 12,
+            transit: '2–5 business days',
+            winner: false,
+          },
+          large: {
+            service: 'Priority Mail',
+            priceMin: 20,
+            priceMax: 40,
+            transit: '1–3 business days',
+            winner: false,
+          },
+          freight: {
+            service: 'Priority Mail',
+            priceMin: 38,
+            priceMax: 70,
+            transit: '1–3 business days',
+            winner: false,
+          },
+        },
+      },
+      {
+        id: 'ups',
+        emoji: '📦',
+        name: 'UPS',
+        bestFor: 'Heavy or large packages',
+        tiers: {
+          small: {
+            service: 'UPS Ground',
+            priceMin: 10,
+            priceMax: 14,
+            transit: '1–5 business days',
+            winner: false,
+          },
+          medium: {
+            service: 'UPS Ground',
+            priceMin: 12,
+            priceMax: 18,
+            transit: '1–5 business days',
+            winner: false,
+          },
+          large: {
+            service: 'UPS Ground',
+            priceMin: 18,
+            priceMax: 35,
+            transit: '1–5 business days',
+            winner: false,
+          },
+          freight: {
+            service: 'UPS Ground / Freight',
+            priceMin: 32,
+            priceMax: 65,
+            transit: '1–5 business days',
+            winner: true,
+          },
+        },
+      },
+      {
+        id: 'fedex',
+        emoji: '🟣',
+        name: 'FedEx',
+        bestFor: 'Heavy packages & express delivery',
+        tiers: {
+          small: {
+            service: 'FedEx Ground',
+            priceMin: 10,
+            priceMax: 14,
+            transit: '1–5 business days',
+            winner: false,
+          },
+          medium: {
+            service: 'FedEx Ground',
+            priceMin: 11,
+            priceMax: 17,
+            transit: '1–5 business days',
+            winner: false,
+          },
+          large: {
+            service: 'FedEx Ground',
+            priceMin: 18,
+            priceMax: 35,
+            transit: '1–5 business days',
+            winner: false,
+          },
+          freight: {
+            service: 'FedEx Ground / Freight',
+            priceMin: 30,
+            priceMax: 65,
+            transit: '1–5 business days',
+            winner: false,
+          },
+        },
+      },
+      {
+        id: 'dhl',
+        emoji: '🟡',
+        name: 'DHL',
+        bestFor: 'Medium packages & international',
+        tiers: {
+          small: {
+            service: 'DHL eCommerce',
+            priceMin: 6,
+            priceMax: 10,
+            transit: '2–8 business days',
+            winner: false,
+          },
+          medium: {
+            service: 'DHL eCommerce',
+            priceMin: 7,
+            priceMax: 11,
+            transit: '2–8 business days',
+            winner: true,
+          },
+          large: {
+            service: 'DHL eCommerce',
+            priceMin: 15,
+            priceMax: 28,
+            transit: '2–8 business days',
+            winner: true,
+          },
+          freight: {
+            service: 'DHL eCommerce / Express',
+            priceMin: 28,
+            priceMax: 60,
+            transit: '1–8 business days',
+            winner: false,
+          },
+        },
+      },
+    ];
+
+    function getTier(weight) {
+      if (weight <= 1) return 'small';
+      if (weight <= 5) return 'medium';
+      if (weight <= 20) return 'large';
+      return 'freight';
+    }
+
+    function autoSelectSize(weight) {
+      const tier = getTier(weight);
+      const radio = document.querySelector(`input[name="pkg_type"][value="${tier}"]`);
+      if (radio) radio.checked = true;
+    }
+
+    function buildCards(tier) {
+      const container = document.getElementById('cards');
+      container.innerHTML = '';
+
+      CARRIERS.forEach(carrier => {
+        const data = carrier.tiers[tier];
+        const isWinner = data.winner;
+
+        const baseClasses = 'border-2 rounded-xl p-5 relative flex flex-col gap-3';
+        const winnerClasses = isWinner
+          ? 'border-teal-400 dark:border-teal-600 bg-teal-50 dark:bg-teal-950'
+          : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900';
+
+        const winnerBadge = isWinner
+          ? `<span class="absolute top-3 right-3 bg-teal-600 dark:bg-teal-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">Winner</span>`
+          : '';
+
+        const priceFormatted = `$${data.priceMin.toLocaleString('en-US')}–$${data.priceMax.toLocaleString('en-US')}`;
+
+        const card = `
+          <div class="${baseClasses} ${winnerClasses}">
+            ${winnerBadge}
+            <div>
+              <div class="text-2xl leading-none mb-1">${carrier.emoji}</div>
+              <div class="text-lg font-bold text-gray-900 dark:text-gray-100">${carrier.name}</div>
+            </div>
+            <div>
+              <div class="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide font-semibold mb-0.5">Best Service</div>
+              <div class="text-sm font-medium text-gray-800 dark:text-gray-200">${data.service}</div>
+            </div>
+            <div>
+              <div class="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide font-semibold mb-0.5">Est. Rate Range</div>
+              <div class="text-xl font-bold text-teal-700 dark:text-teal-400">${priceFormatted}</div>
+              <div class="text-xs text-gray-400 dark:text-gray-500">retail, before discounts</div>
+            </div>
+            <div>
+              <div class="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide font-semibold mb-0.5">Transit Time</div>
+              <div class="text-sm text-gray-700 dark:text-gray-300">${data.transit}</div>
+            </div>
+            <div class="mt-auto pt-2 border-t border-gray-200 dark:border-gray-700">
+              <div class="text-xs text-gray-500 dark:text-gray-400 font-semibold uppercase tracking-wide mb-0.5">Best For</div>
+              <div class="text-xs text-gray-600 dark:text-gray-400">${carrier.bestFor}</div>
+            </div>
+          </div>
+        `;
+        container.insertAdjacentHTML('beforeend', card);
+      });
+    }
+
+    document.getElementById('compare-form').addEventListener('submit', e => {
+      e.preventDefault();
+      const weight = parseFloat(document.getElementById('weight').value) || 1;
+      const checkedRadio = document.querySelector('input[name="pkg_type"]:checked');
+      const tier = checkedRadio ? checkedRadio.value : getTier(weight);
+
+      buildCards(tier);
+      document.getElementById('results').classList.remove('hidden');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    // Auto-select size radio when weight changes
+    document.getElementById('weight').addEventListener('input', e => {
+      const weight = parseFloat(e.target.value);
+      if (!isNaN(weight) && weight > 0) {
+        autoSelectSize(weight);
+      }
+    });
+  </script>
+</Base>

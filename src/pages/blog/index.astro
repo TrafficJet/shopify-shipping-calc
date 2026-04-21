@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 const posts = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
+<<<<<<< HEAD
 <Base title="Shopify Shipping Blog — Guides & Tips" description="Expert guides on Shopify shipping rates, zones, free shipping strategies, and carrier comparisons.">
   <h1 class="text-3xl font-bold mb-8">Shipping Blog</h1>
   {posts.length === 0 && <p class="text-gray-500">No posts yet — check back soon!</p>}
@@ -17,4 +18,25 @@ const posts = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueO
       </li>
     ))}
   </ul>
+=======
+<Base title="Shopify Shipping Blog — Guides & Tools for Sellers" description="Shipping guides, carrier comparisons, and cost-saving strategies for Shopify sellers.">
+  {posts.length === 0 && <meta slot="head" name="robots" content="noindex, follow" />}
+  <div class="max-w-3xl mx-auto">
+    <h1 class="text-3xl font-bold mb-2">Shopify Shipping Blog</h1>
+    <p class="text-gray-500 dark:text-gray-400 mb-10">Shipping guides, carrier comparisons, and cost strategies for Shopify sellers.</p>
+    {posts.length === 0 && <p class="text-gray-400 dark:text-gray-500 py-12 text-center">Articles coming soon...</p>}
+    <div class="space-y-8">
+      {posts.map(post => (
+        <article class="border-b border-gray-100 dark:border-gray-800 pb-8">
+          <a href={`/blog/${post.slug}/`} class="block group">
+            <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100 group-hover:text-teal-700 dark:group-hover:text-teal-400 mb-2">{post.data.title}</h2>
+          </a>
+          <p class="text-gray-500 dark:text-gray-400 text-sm mb-2">{post.data.pubDate.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</p>
+          <p class="text-gray-600 dark:text-gray-400">{post.data.description}</p>
+          <a href={`/blog/${post.slug}/`} class="text-teal-600 dark:text-teal-400 text-sm mt-3 inline-block hover:underline">Read more →</a>
+        </article>
+      ))}
+    </div>
+  </div>
+>>>>>>> 4ed2bf0 (feat: rebrand to ShipCalc, teal theme, new calculators, shipping articles)
 </Base>

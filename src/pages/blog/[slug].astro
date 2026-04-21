@@ -8,7 +8,7 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await post.render();
 const canonicalUrl = `https://shopify-shipping-calc.com/blog/${post.slug}/`;
-const schema = {
+const schema = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": post.data.title,
@@ -17,12 +17,12 @@ const schema = {
   "datePublished": post.data.pubDate.toISOString().split('T')[0],
   "dateModified": post.data.pubDate.toISOString().split('T')[0],
   "author": { "@type": "Person", "name": post.data.author || "Alex Morgan" },
-  "publisher": { "@type": "Organization", "name": "ShippingCalc", "url": "https://shopify-shipping-calc.com" }
-};
+  "publisher": { "@type": "Organization", "name": "ShipCalc", "url": "https://shopify-shipping-calc.com" }
+});
 ---
 <Base title={post.data.seoTitle || post.data.title} description={post.data.description} canonicalUrl={canonicalUrl} ogImage={post.data.heroImage || undefined}>
-  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
-  <article class="max-w-3xl mx-auto prose prose-sky prose-lg">
+  <script type="application/ld+json" set:html={schema} />
+  <article class="max-w-3xl mx-auto prose prose-teal prose-lg dark:prose-invert">
     <p class="text-sm text-gray-400 not-prose mb-4">{post.data.pubDate.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})} · By {post.data.author}</p>
     <Content />
   </article>
