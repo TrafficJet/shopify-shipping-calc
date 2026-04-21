@@ -6,6 +6,8 @@ description: "Master Shopify SEO with technical fixes, keyword strategies & link
 author: "Alex Morgan"
 tags: ["shopify seo guide 2025"]
 seoTitle: "Shopify SEO Guide 2025: Rank Higher & Sell More | Playbook"
+heroImage: "/images/shopify-seo-guide-2025/hero.jpg"
+heroImageAlt: "Shopify store dashboard displaying SEO metrics and organic traffic analytics on laptop screen"
 ---
 
 # Shopify SEO Guide 2025: Rank Higher & Sell More
