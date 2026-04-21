@@ -11,7 +11,7 @@ heroImageAlt: "Shipping boxes with priority mail labels, scale, and calculator s
 ---
 *By Jordan Reeves — Shopify merchant since 2019, former logistics coordinator at a 3PL fulfillment center. Currently runs a DTC home goods brand shipping 1,200+ orders/month.*
 
-Shipping costs kill margins faster than almost anything else. This guide covers the actual 2026 rates you pay when buying labels through Shopify for USPS, UPS, FedEx, and DHL — real price comparisons, discount tiers, and a clear framework for picking the right carrier.
+Shipping costs kill margins faster than almost anything else. This guide covers the actual 2026 Shopify shipping rates you pay when buying labels through Shopify for USPS, UPS, FedEx, and DHL — real price comparisons, discount tiers, and a clear framework for picking the right carrier.
 
 > **[📥 Download the 2026 Rate Comparison Spreadsheet](#)** — Customize it with your own package weights and zones.
 
@@ -19,7 +19,7 @@ Shipping costs kill margins faster than almost anything else. This guide covers 
 
 ## Shopify Shipping Discounts Depend on Your Plan Tier
 
-Shopify negotiates bulk carrier discounts and passes them to you directly. The discount level depends on your plan: Basic, Grow, Advanced, or Plus. Higher plans unlock steeper discounts — up to 88% off retail carrier rates on certain services (Shopify Shipping, 2026).
+Shopify negotiates bulk carrier discounts and passes them directly to you. The discount level depends on your plan: Basic, Grow, Advanced, or Plus. Higher plans unlock steeper discounts — up to 88% off retail carrier rates on certain services (Shopify Shipping, 2026).
 
 These discounts apply automatically when you buy labels inside the Shopify admin at **Settings → Shipping and delivery → Shopify Shipping**. No separate carrier account needed for USPS, UPS, or DHL. You do need Shopify Payments active on your store to access the full discount range. Third-party payment gateways may limit your options.
 
@@ -146,7 +146,7 @@ A 2023 Baymard Institute study on checkout usability found that unexpected costs
 
 *(Shopify Shipping rate cards, 2026. Rates reflect Grow plan. Actual rates vary by origin zip, destination, and package dimensions.)*
 
-**The crossover point is around 10–12 lbs.** USPS wins below that. UPS and FedEx get cheaper per pound above it. DHL Express is the clear choice for international speed and cost.
+The crossover point is around 10–12 lbs. USPS wins below that. UPS and FedEx get cheaper per pound above it. DHL Express is the clear choice for international speed and cost.
 
 USPS, UPS, and FedEx all raised rates 4.9–5.9% in January 2026 (UPS and FedEx GRI announcements, 2026). Rates change every year — always check current rates inside your Shopify admin at **Settings → Shipping and delivery** before locking in your pricing strategy.
 
@@ -156,7 +156,7 @@ USPS, UPS, and FedEx all raised rates 4.9–5.9% in January 2026 (UPS and FedEx 
 
 Base your decision on three things: average package weight, domestic vs. international order mix, and how fast your customers expect delivery.
 
-**Most merchants do better with multiple carriers than with one.** Here's how to split your volume:
+Most merchants do better with multiple carriers than with one. Here's how to split your volume:
 
 - **Under 13 oz:** USPS First-Class Package — cheapest domestic option by a wide margin
 - **13 oz – 10 lbs:** USPS Ground Advantage or Priority Mail
