@@ -5,49 +5,104 @@ import Base from '../layouts/Base.astro';
   title="Shopify Shipping Calculator — Free Tools for Sellers"
   description="Free Shopify shipping calculators: compare USPS, UPS, FedEx & DHL rates, calculate dimensional weight, find free shipping thresholds. No signup required."
 >
-  <section class="text-center py-12">
-    <h1 class="text-4xl font-bold mb-4">Free Shopify Shipping Tools</h1>
-    <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-      Calculate shipping costs, compare carriers, and find the right free shipping threshold for your Shopify store.
+  <!-- Hero -->
+  <section class="text-center py-10 border-b border-gray-100 dark:border-gray-800 mb-8">
+    <h1 class="text-4xl font-bold mb-3">Free Shopify Shipping Tools</h1>
+    <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-5">
+      Calculate shipping costs, compare USPS, UPS, FedEx &amp; DHL rates, and find the optimal free shipping threshold for your store.
     </p>
+    <div class="flex flex-wrap gap-3 justify-center">
+      <a href="/shipping/" class="bg-teal-600 hover:bg-teal-700 text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition">Browse by State →</a>
+      <a href="/shipping-calculator/" class="border-2 border-teal-600 text-teal-700 dark:text-teal-400 dark:border-teal-500 hover:bg-teal-50 dark:hover:bg-teal-950 px-5 py-2.5 rounded-lg text-sm font-semibold transition">Quick Rate Lookup →</a>
+    </div>
   </section>
 
-  <section class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-    <a href="/shipping/" class="block border-2 border-teal-400 dark:border-teal-600 bg-teal-50 dark:bg-teal-950 rounded-xl p-6 hover:shadow-md transition md:col-span-2">
-      <div class="text-xs font-medium text-teal-700 dark:text-teal-400 uppercase tracking-wide mb-1">280+ Cities — All Carriers</div>
-      <h2 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">Shipping Rates by City</h2>
-      <p class="text-gray-600 dark:text-gray-400 text-sm">Compare USPS, UPS, FedEx, and DHL rates from any US city to any destination. Side-by-side price comparison across all service levels.</p>
+  <!-- 2 flagship tools -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+    <a href="/shipping/" class="group flex flex-col border-2 border-teal-400 dark:border-teal-600 bg-teal-50 dark:bg-teal-950 rounded-xl p-6 hover:shadow-lg transition-all">
+      <div class="flex items-center gap-3 mb-3">
+        <span class="text-3xl">🗺️</span>
+        <div>
+          <div class="text-xs font-semibold text-teal-700 dark:text-teal-400 uppercase tracking-wide">280+ Cities · 50 States</div>
+          <h2 class="text-lg font-bold text-gray-900 dark:text-gray-100 group-hover:text-teal-700 dark:group-hover:text-teal-400 transition-colors">Shipping Rates by City &amp; State</h2>
+        </div>
+      </div>
+      <p class="text-sm text-gray-600 dark:text-gray-400 flex-1">USPS, UPS, FedEx, and DHL rates from any US city. Every state has its own rate calculator, USPS/UPS tables, and carrier comparison.</p>
+      <div class="mt-3 text-xs font-medium text-teal-700 dark:text-teal-400">Browse all 50 states →</div>
     </a>
-    <a href="/dimensional-weight/" class="block border-2 border-blue-400 dark:border-blue-600 bg-blue-50 dark:bg-blue-950 rounded-xl p-6 hover:shadow-md transition">
-      <div class="text-xs font-medium text-blue-700 dark:text-blue-400 uppercase tracking-wide mb-1">New</div>
-      <h2 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">Dimensional Weight Calculator</h2>
-      <p class="text-gray-600 dark:text-gray-400 text-sm">Calculate DIM weight for USPS, UPS, FedEx, and DHL. See which weight — actual or dimensional — you'll actually be billed for.</p>
+    <a href="/dimensional-weight/" class="group flex flex-col border-2 border-blue-400 dark:border-blue-600 bg-blue-50 dark:bg-blue-950 rounded-xl p-6 hover:shadow-lg transition-all">
+      <div class="flex items-center gap-3 mb-3">
+        <span class="text-3xl">📦</span>
+        <div>
+          <div class="text-xs font-semibold text-blue-700 dark:text-blue-400 uppercase tracking-wide">Save on shipping</div>
+          <h2 class="text-lg font-bold text-gray-900 dark:text-gray-100 group-hover:text-blue-700 dark:group-hover:text-blue-400 transition-colors">Dimensional Weight Calculator</h2>
+        </div>
+      </div>
+      <p class="text-sm text-gray-600 dark:text-gray-400 flex-1">Calculate DIM weight for USPS, UPS, FedEx, and DHL. See exactly which weight you'll be billed for and how to optimize packaging.</p>
+      <div class="mt-3 text-xs font-medium text-blue-700 dark:text-blue-400">Calculate DIM weight →</div>
     </a>
-    <a href="/free-shipping-threshold/" class="block border-2 border-green-400 dark:border-green-600 bg-green-50 dark:bg-green-950 rounded-xl p-6 hover:shadow-md transition">
-      <div class="text-xs font-medium text-green-700 dark:text-green-400 uppercase tracking-wide mb-1">Popular</div>
-      <h2 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">Free Shipping Threshold Calculator</h2>
-      <p class="text-gray-600 dark:text-gray-400 text-sm">Find the optimal minimum order value that covers your shipping cost without hurting margin. Boost AOV the right way.</p>
+  </div>
+
+  <!-- 4 tools in 2×2 grid -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+    <a href="/free-shipping-threshold/" class="group flex items-start gap-4 border border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-950 rounded-xl p-5 hover:border-green-400 dark:hover:border-green-600 hover:shadow-md transition-all">
+      <span class="text-2xl mt-0.5">🚚</span>
+      <div>
+        <div class="text-xs font-semibold text-green-700 dark:text-green-400 uppercase tracking-wide mb-1">Boost AOV</div>
+        <h2 class="font-bold text-gray-900 dark:text-gray-100 mb-1 group-hover:text-green-700 dark:group-hover:text-green-400 transition-colors">Free Shipping Threshold</h2>
+        <p class="text-xs text-gray-500 dark:text-gray-400">Optimal order minimum that covers shipping cost without hurting margin.</p>
+      </div>
     </a>
-    <a href="/carrier-comparison/" class="block border dark:border-gray-700 rounded-xl p-6 hover:shadow-md transition">
-      <h2 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">Carrier Comparison</h2>
-      <p class="text-gray-600 dark:text-gray-400 text-sm">USPS vs UPS vs FedEx vs DHL — side-by-side rates, delivery times, and which carrier wins for your package size and zone.</p>
+    <a href="/carrier-comparison/" class="group flex items-start gap-4 border border-gray-200 dark:border-gray-700 rounded-xl p-5 hover:border-teal-400 dark:hover:border-teal-600 hover:bg-teal-50 dark:hover:bg-teal-950 hover:shadow-md transition-all">
+      <span class="text-2xl mt-0.5">⚖️</span>
+      <div>
+        <h2 class="font-bold text-gray-900 dark:text-gray-100 mb-1 group-hover:text-teal-700 dark:group-hover:text-teal-400 transition-colors">Carrier Comparison</h2>
+        <p class="text-xs text-gray-500 dark:text-gray-400">USPS vs UPS vs FedEx vs DHL — side-by-side rates and which wins for your package.</p>
+      </div>
     </a>
-    <a href="/china-shipping/" class="block border border-purple-200 dark:border-purple-800 bg-purple-50 dark:bg-purple-950 rounded-xl p-6 hover:shadow-md transition">
-      <div class="text-xs font-medium text-purple-600 dark:text-purple-400 uppercase tracking-wide mb-1">50 Countries</div>
-      <h2 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">China Shipping Rates</h2>
-      <p class="text-gray-600 dark:text-gray-400 text-sm">ePacket, DHL, FedEx International rates from China to 50+ countries. 2026 rates for dropshipping and sourcing.</p>
+    <a href="/china-shipping/" class="group flex items-start gap-4 border border-purple-200 dark:border-purple-800 bg-purple-50 dark:bg-purple-950 rounded-xl p-5 hover:border-purple-400 dark:hover:border-purple-600 hover:shadow-md transition-all">
+      <span class="text-2xl mt-0.5">🇨🇳</span>
+      <div>
+        <div class="text-xs font-semibold text-purple-700 dark:text-purple-400 uppercase tracking-wide mb-1">50 Countries</div>
+        <h2 class="font-bold text-gray-900 dark:text-gray-100 mb-1 group-hover:text-purple-700 dark:group-hover:text-purple-400 transition-colors">China Shipping Rates</h2>
+        <p class="text-xs text-gray-500 dark:text-gray-400">ePacket, DHL, FedEx International rates from China. 2026 dropshipping rates.</p>
+      </div>
     </a>
-    <a href="/shipping-calculator/" class="block border dark:border-gray-700 rounded-xl p-6 hover:shadow-md transition">
-      <h2 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">Shipping Rate Calculator</h2>
-      <p class="text-gray-600 dark:text-gray-400 text-sm">Estimate USPS, UPS, and FedEx costs by weight and destination zip code. Quick lookup for any package size.</p>
+    <a href="/shipping-calculator/" class="group flex items-start gap-4 border border-gray-200 dark:border-gray-700 rounded-xl p-5 hover:border-teal-400 dark:hover:border-teal-600 hover:bg-teal-50 dark:hover:bg-teal-950 hover:shadow-md transition-all">
+      <span class="text-2xl mt-0.5">🔢</span>
+      <div>
+        <h2 class="font-bold text-gray-900 dark:text-gray-100 mb-1 group-hover:text-teal-700 dark:group-hover:text-teal-400 transition-colors">Shipping Rate Calculator</h2>
+        <p class="text-xs text-gray-500 dark:text-gray-400">Estimate USPS, UPS, FedEx costs by weight and destination zip code.</p>
+      </div>
     </a>
-    <a href="/profit-margin/" class="block border dark:border-gray-700 rounded-xl p-6 hover:shadow-md transition">
-      <h2 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">Profit Margin Calculator</h2>
-      <p class="text-gray-600 dark:text-gray-400 text-sm">Calculate net margin after COGS, Shopify fees, payment processing, and shipping costs combined.</p>
-    </a>
-    <a href="/break-even/" class="block border dark:border-gray-700 rounded-xl p-6 hover:shadow-md transition">
-      <h2 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">Break-Even Calculator</h2>
-      <p class="text-gray-600 dark:text-gray-400 text-sm">Find the minimum units needed to cover fixed and variable costs including shipping.</p>
-    </a>
-  </section>
+  </div>
+
+  <!-- State pages grid -->
+  <div class="border-t border-gray-200 dark:border-gray-700 pt-7 mb-8">
+    <div class="flex items-center gap-3 mb-4">
+      <h2 class="text-sm font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500">Shipping Rates by State</h2>
+      <span class="text-xs bg-teal-100 dark:bg-teal-900 text-teal-700 dark:text-teal-300 px-2 py-0.5 rounded-full font-medium">50 pages</span>
+    </div>
+    <div class="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-10 gap-2 text-xs">
+      {['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','Florida','Georgia',
+        'Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland',
+        'Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey',
+        'New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina',
+        'South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming'
+      ].map(state => (
+        <a href={`/shipping/${state.toLowerCase().replace(/\s+/g, '-')}/`}
+          class="text-center p-2 border border-gray-200 dark:border-gray-700 rounded hover:border-teal-400 dark:hover:border-teal-600 hover:bg-teal-50 dark:hover:bg-teal-950 hover:text-teal-700 dark:hover:text-teal-400 text-gray-600 dark:text-gray-400 transition-colors leading-tight">
+          {state}
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <!-- Trust bar -->
+  <div class="flex flex-wrap gap-6 justify-center text-sm text-gray-400 dark:text-gray-500 border-t border-gray-100 dark:border-gray-800 pt-6">
+    <span>✓ USPS, UPS, FedEx &amp; DHL</span>
+    <span>✓ 2026 rates</span>
+    <span>✓ All 50 states</span>
+    <span>✓ No signup</span>
+  </div>
 </Base>
