@@ -6,6 +6,8 @@ description: "Compare Shopify Stripe vs Shopify Payments in 2026. See real trans
 author: "Alex Morgan"
 tags: ["shopify stripe vs shopify payments"]
 seoTitle: "Shopify Stripe vs Shopify Payments: Which to Use?"
+heroImage: "/images/shopify-stripe-vs-shopify-payments/hero.jpg"
+heroImageAlt: "Shopify admin dashboard showing payment processing settings and transaction fees"
 ---
 
 # Shopify Stripe vs Shopify Payments: Which to Use?
