@@ -9,7 +9,7 @@ interface Props {
 const { title, description, canonicalUrl, ogImage, noWebAppSchema } = Astro.props;
 const canon = canonicalUrl || Astro.url.href;
 const finalOgImage = ogImage || 'https://shopify-shipping-calc.com/og-default.png';
-const GA_ID = 'G-XXXXXXXXXX'; // TODO: replace with your GA4 property ID for shopify-shipping-calc.com
+const GA_ID = 'G-QT3RQMZ56J';
 const webAppSchemaJson = JSON.stringify({"@context":"https://schema.org","@type":"WebApplication","name":"Shopify Shipping Calculator","url":"https://shopify-shipping-calc.com/","description":"Free Shopify shipping calculator. Compare USPS, UPS, FedEx, and DHL rates. Calculate dimensional weight, free shipping thresholds, and carrier costs for your store.","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}});
 ---
 <!DOCTYPE html>
