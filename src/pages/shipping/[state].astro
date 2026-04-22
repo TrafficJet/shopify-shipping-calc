@@ -9,99 +9,564 @@ export function getStaticPaths() {
 
 const { state: stateSlug } = Astro.params;
 const stateData = states.find(s => s.slug === stateSlug)!;
-const firstCity = stateData.cities[0];
-const originRegion = firstCity.region;
+const originRegion = stateData.cities[0].region;
 
-// Cheapest carrier for 1lb package to each destination region
-const sampleWeight = 16; // 1 lb in oz
-const regions = ['northeast', 'southeast', 'midwest', 'southwest', 'west'] as const;
+const regionLabels: Record<string, string> = {
+  northeast: 'Northeast', southeast: 'Southeast',
+  midwest: 'Midwest', southwest: 'Southwest', west: 'West',
+};
+const regionLabel = regionLabels[originRegion] ?? originRegion;
+
+// Nearby states (same region, first 5)
+const nearbyStates = states
+  .filter(s => s.slug !== stateData.slug && s.cities[0]?.region === originRegion)
+  .slice(0, 6);
+
+// Key carriers for rate tables
+const uspsGA   = carriers.find(c => c.id === 'usps-ground-advantage')!;
+const uspsPM   = carriers.find(c => c.id === 'usps-priority-mail')!;
+const upsG     = carriers.find(c => c.id === 'ups-ground')!;
+const fedexG   = carriers.find(c => c.id === 'fedex-ground')!;
+
+// Destination regions for the table
+const destRegions = ['northeast', 'southeast', 'midwest', 'southwest', 'west'] as const;
+
+// Weight tiers to show in the comparison table
+const weightTiers = [
+  { label: '1 lb', oz: 16 },
+  { label: '2 lb', oz: 32 },
+  { label: '5 lb', oz: 80 },
+  { label: '10 lb', oz: 160 },
+  { label: '20 lb', oz: 320 },
+];
+
+// Get rate for a carrier/oz/zone combo
+function getRate(car: typeof uspsGA, oz: number, zone: number): number | null {
+  const tier = car.rates.find(r => r.oz >= oz);
+  return tier?.zones[zone] ?? null;
+}
+
+// Determine cheapest carrier at 1lb to each destination
+function cheapestAtZone(zone: number) {
+  const candidates = [
+    { name: 'USPS Ground Advantage', rate: getRate(uspsGA, 16, zone) },
+    { name: 'USPS Priority Mail',    rate: getRate(uspsPM, 16, zone) },
+    { name: 'UPS Ground',            rate: getRate(upsG,   16, zone) },
+    { name: 'FedEx Ground',          rate: getRate(fedexG, 16, zone) },
+  ].filter(c => c.rate !== null) as { name: string; rate: number }[];
+  return candidates.sort((a, b) => a.rate - b.rate)[0];
+}
+
+// For schema: compute a representative rate (1lb to same region = zone 2)
+const selfZone = ZONE_MATRIX[originRegion][originRegion];
+const repRate = getRate(uspsGA, 16, selfZone);
+
+const softwareSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": `${stateData.name} Shipping Rate Calculator`,
+  "url": `https://shopify-shipping-calc.com/shipping/${stateData.slug}/`,
+  "description": `Free ${stateData.name} shipping rate calculator. Compare USPS, UPS, FedEx, and DHL rates for packages shipped from ${stateData.abbr}. Zone-based pricing updated for 2026.`,
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+});
+
+const faqSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": `What is the cheapest way to ship a package from ${stateData.name}?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": `For packages under 1 lb shipped from ${stateData.name}, USPS Ground Advantage is typically the cheapest option at $${(repRate ?? 5.49).toFixed(2)}–$11.50 depending on destination. For packages over 1 lb going to nearby states in the ${regionLabel} region (Zone ${selfZone}), USPS Ground Advantage and UPS Ground are competitive. For cross-country shipments (Zone 7–8), compare all four carriers — FedEx Ground sometimes offers better commercial rates.`
+      }
+    },
+    {
+      "@type": "Question",
+      "name": `How much does it cost to ship from ${stateData.name} to California?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": `Shipping from ${stateData.name} to California (${originRegion === 'west' ? 'same region, Zone ' + ZONE_MATRIX[originRegion]['west'] : 'Zone ' + ZONE_MATRIX[originRegion]['west']}) costs approximately: USPS Ground Advantage $${getRate(uspsGA, 16, ZONE_MATRIX[originRegion]['west'])?.toFixed(2)} (1 lb), UPS Ground $${getRate(upsG, 16, ZONE_MATRIX[originRegion]['west'])?.toFixed(2)} (1 lb), FedEx Ground $${getRate(fedexG, 16, ZONE_MATRIX[originRegion]['west'])?.toFixed(2) ?? 'varies'} (1 lb). Use our calculator above for exact rates by package weight.`
+      }
+    },
+    {
+      "@type": "Question",
+      "name": `Does ${stateData.name} sales tax apply to Shopify shipping charges?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": `${stateData.name} has a ${stateData.taxRate}% state sales tax rate. ${stateData.taxRate === 0 ? `${stateData.name} is one of the few states with no state sales tax, which simplifies tax collection for Shopify merchants. You may still need to collect local taxes in some jurisdictions.` : `Shopify automatically calculates sales tax for orders shipped within ${stateData.name}. Shipping charges may or may not be taxable depending on the specific product category — Shopify Tax handles this automatically for most merchants.`}`
+      }
+    },
+    {
+      "@type": "Question",
+      "name": `How do USPS shipping zones work from ${stateData.name}?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": `${stateData.name} is in the ${regionLabel} region. USPS zones are based on distance from your origin ZIP code: Zone 1–2 covers local delivery within your state, Zone 3–4 covers nearby states, Zone 5–6 covers mid-range destinations, and Zone 7–8 covers coast-to-coast shipping. From ${stateData.name}, shipping to the ${regionLabel} region costs Zone ${selfZone} rates, while shipping cross-country costs Zone ${Math.max(...Object.values(ZONE_MATRIX[originRegion]))} rates.`
+      }
+    },
+    {
+      "@type": "Question",
+      "name": `What is the USPS Ground Advantage rate from ${stateData.name} in 2026?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": `USPS Ground Advantage rates from ${stateData.name} in 2026 range from $${getRate(uspsGA, 16, selfZone)?.toFixed(2)} (1 lb, within ${regionLabel} region) to $${getRate(uspsGA, 16, Math.max(...Object.values(ZONE_MATRIX[originRegion])))?.toFixed(2)} (1 lb, cross-country). For heavier packages (5 lb), expect $${getRate(uspsGA, 80, selfZone)?.toFixed(2)}–$${getRate(uspsGA, 80, Math.max(...Object.values(ZONE_MATRIX[originRegion])))?.toFixed(2)}. USPS Ground Advantage replaced First Class Package Service and Parcel Select Ground in 2023.`
+      }
+    },
+    {
+      "@type": "Question",
+      "name": `Should I use UPS or FedEx for shipping from ${stateData.name}?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": `For ground shipping from ${stateData.name}, UPS Ground and FedEx Ground have very similar rates. Both offer 1–5 business day delivery with full tracking. Key differences: UPS offers better rates for commercial accounts with high volume, FedEx has more drop-off locations in some ${stateData.name} areas, and FedEx Home Delivery reaches residential addresses on Saturdays. For packages under 1 lb, USPS typically beats both UPS and FedEx on price.`
+      }
+    }
+  ]
+});
+
+const breadcrumbSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shopify-shipping-calc.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Shipping by State", "item": "https://shopify-shipping-calc.com/shipping/" },
+    { "@type": "ListItem", "position": 3, "name": stateData.name, "item": `https://shopify-shipping-calc.com/shipping/${stateData.slug}/` }
+  ]
+});
 ---
 <Base
-  title={`Shipping Rates from ${stateData.name} — USPS, UPS, FedEx 2026 | ShopifyCalc`}
-  description={`Compare shipping rates from ${stateData.name} cities. USPS, UPS, FedEx, and DHL rates for packages of all sizes. Free zone calculator.`}
-  canonicalUrl={`https://shopify-fee-calc.com/shipping/${stateData.slug}/`}
+  title={`${stateData.name} Shipping Rates 2026 — USPS, UPS, FedEx & DHL Calculator`}
+  description={`Compare USPS, UPS, FedEx, and DHL shipping rates from ${stateData.name} (${stateData.abbr}). Free calculator for any package weight. Zone ${selfZone} to Zone ${Math.max(...Object.values(ZONE_MATRIX[originRegion]))} rates updated 2026.`}
+  canonicalUrl={`https://shopify-shipping-calc.com/shipping/${stateData.slug}/`}
+  noWebAppSchema={true}
 >
-  <nav class="text-sm text-gray-500 mb-4">
-    <a href="/" class="hover:text-blue-700">Home</a>
-    <span class="mx-2">›</span>
-    <a href="/shipping/" class="hover:text-blue-700">Shipping by State</a>
-    <span class="mx-2">›</span>
-    <span class="text-gray-900">{stateData.name}</span>
+  <script type="application/ld+json" set:html={softwareSchema} slot="head" />
+  <script type="application/ld+json" set:html={faqSchema} slot="head" />
+  <script type="application/ld+json" set:html={breadcrumbSchema} slot="head" />
+
+  <!-- Breadcrumb -->
+  <nav class="text-sm text-gray-500 dark:text-gray-400 mb-5 flex items-center gap-1 flex-wrap">
+    <a href="/" class="hover:text-teal-700 dark:hover:text-teal-400">Home</a>
+    <span>›</span>
+    <a href="/shipping/" class="hover:text-teal-700 dark:hover:text-teal-400">Shipping by State</a>
+    <span>›</span>
+    <span class="text-gray-800 dark:text-gray-200">{stateData.name}</span>
   </nav>
 
-  <h1 class="text-3xl font-bold mb-3">Shipping Rates from {stateData.name} ({stateData.abbr})</h1>
-  <p class="text-gray-600 mb-8 text-lg max-w-2xl">
-    Select a city in {stateData.name} to see detailed shipping rates from USPS, UPS, FedEx, and DHL — with a live rate calculator for any package weight.
+  <h1 class="text-3xl font-bold mb-3">{stateData.name} ({stateData.abbr}) Shipping Rates 2026</h1>
+  <p class="text-gray-600 dark:text-gray-400 mb-2 text-lg max-w-3xl">
+    Compare USPS, UPS, FedEx, and DHL shipping rates from {stateData.name}. Free calculator for any package weight — updated for 2026 commercial rates.
+  </p>
+  <p class="text-sm text-gray-500 dark:text-gray-400 mb-8 max-w-3xl">
+    {stateData.name} is in the <strong class="text-gray-700 dark:text-gray-300">{regionLabel}</strong> shipping region. Local delivery (within {regionLabel}) uses <strong>Zone {selfZone}</strong> rates. Cross-country shipments to the West or Northeast reach <strong>Zone {Math.max(...Object.values(ZONE_MATRIX[originRegion]))}</strong>.
+    State sales tax: <strong>{stateData.taxRate}%</strong>{stateData.taxRate === 0 ? ' (no state tax)' : ''}.
   </p>
 
-  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mb-12">
-    {stateData.cities.map(city => (
-      <a
-        href={`/shipping/${stateData.slug}/${city.slug}/`}
-        class="border rounded-xl p-4 hover:border-blue-400 hover:bg-blue-50 transition group"
-      >
-        <div class="font-medium text-sm group-hover:text-blue-700">{city.name}</div>
-        <div class="text-xs text-gray-500 mt-0.5">ZIP {city.zip}</div>
-        <div class="text-xs text-gray-400 mt-1 capitalize">{city.region}</div>
-      </a>
-    ))}
+  <!-- Quick Rate Calculator -->
+  <div class="bg-teal-50 dark:bg-teal-950 border border-teal-200 dark:border-teal-800 rounded-2xl p-6 mb-8 max-w-3xl">
+    <h2 class="text-lg font-semibold text-teal-900 dark:text-teal-100 mb-4">Quick Rate Calculator — from {stateData.name}</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+      <div>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Package Weight</label>
+        <select id="calcWeight" class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm">
+          <option value="1">1 oz</option>
+          <option value="4">4 oz</option>
+          <option value="8">8 oz</option>
+          <option value="12">12 oz</option>
+          <option value="16" selected>1 lb</option>
+          <option value="32">2 lb</option>
+          <option value="48">3 lb</option>
+          <option value="80">5 lb</option>
+          <option value="160">10 lb</option>
+          <option value="320">20 lb</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Ship To</label>
+        <select id="calcDest" class="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm">
+          <option value="northeast">Northeast (NY, MA, PA, NJ…)</option>
+          <option value="southeast">Southeast (FL, GA, NC, TX…)</option>
+          <option value="midwest">Midwest (IL, OH, MI, MN…)</option>
+          <option value="southwest">Southwest (AZ, CO, NM, NV…)</option>
+          <option value="west">West Coast (CA, OR, WA…)</option>
+        </select>
+      </div>
+      <div class="flex items-end">
+        <button onclick="calcRates()" class="w-full bg-teal-700 hover:bg-teal-800 text-white font-medium py-2 px-4 rounded-lg transition text-sm">
+          Calculate
+        </button>
+      </div>
+    </div>
+    <div id="calcResults" class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+      <div class="bg-white dark:bg-gray-800 rounded-xl p-3 border border-gray-200 dark:border-gray-700 text-center">
+        <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">USPS Ground Adv.</p>
+        <p id="r-uspsga" class="text-lg font-bold text-teal-700 dark:text-teal-400">—</p>
+        <p class="text-xs text-gray-400">2–5 days</p>
+      </div>
+      <div class="bg-white dark:bg-gray-800 rounded-xl p-3 border border-gray-200 dark:border-gray-700 text-center">
+        <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">USPS Priority</p>
+        <p id="r-uspspm" class="text-lg font-bold text-teal-700 dark:text-teal-400">—</p>
+        <p class="text-xs text-gray-400">1–3 days</p>
+      </div>
+      <div class="bg-white dark:bg-gray-800 rounded-xl p-3 border border-gray-200 dark:border-gray-700 text-center">
+        <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">UPS Ground</p>
+        <p id="r-ups" class="text-lg font-bold text-teal-700 dark:text-teal-400">—</p>
+        <p class="text-xs text-gray-400">1–5 days</p>
+      </div>
+      <div class="bg-white dark:bg-gray-800 rounded-xl p-3 border border-gray-200 dark:border-gray-700 text-center">
+        <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">FedEx Ground</p>
+        <p id="r-fedex" class="text-lg font-bold text-teal-700 dark:text-teal-400">—</p>
+        <p class="text-xs text-gray-400">1–5 days</p>
+      </div>
+    </div>
+    <p id="calcZone" class="text-xs text-gray-400 dark:text-gray-500 mt-3">Select destination and click Calculate to see rates.</p>
   </div>
 
-  <div class="max-w-3xl mb-12">
-    <h2 class="text-xl font-bold mb-4">Shipping Zones from {stateData.name}</h2>
-    <p class="text-sm text-gray-600 mb-4">
-      {stateData.name} is in the <strong class="capitalize">{originRegion}</strong> region.
-      Zone determines your rate — closer destinations have lower zones and cheaper shipping.
+  <!-- Cheapest carrier callout per destination -->
+  <div class="mb-8 max-w-3xl">
+    <h2 class="text-xl font-bold mb-4">Cheapest Carrier from {stateData.name} by Destination (1 lb)</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      {destRegions.map(dest => {
+        const zone = ZONE_MATRIX[originRegion][dest];
+        const best = cheapestAtZone(zone);
+        return (
+          <div class="border border-gray-200 dark:border-gray-700 rounded-xl p-4 bg-white dark:bg-gray-800">
+            <p class="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-1">{regionLabels[dest]}</p>
+            <p class="text-xs text-gray-400 mb-2">Zone {zone}</p>
+            <p class="font-semibold text-teal-700 dark:text-teal-400">${best?.rate.toFixed(2)}</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{best?.name}</p>
+          </div>
+        );
+      })}
+    </div>
+    <p class="text-xs text-gray-400 dark:text-gray-500 mt-2">* Approximate 2026 commercial rates for a 1 lb package. Residential surcharges may apply for UPS/FedEx.</p>
+  </div>
+
+  <!-- Full rate comparison table -->
+  <div class="mb-10 max-w-4xl">
+    <h2 class="text-xl font-bold mb-4">Full Rate Table — USPS from {stateData.name} by Weight & Destination</h2>
+    <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+      USPS Ground Advantage rates for packages shipped from {stateData.name} ({stateData.abbr}). Rates depend on destination zone.
     </p>
-    <div class="overflow-x-auto">
-      <table class="w-full text-sm border rounded-xl overflow-hidden">
-        <thead class="bg-gray-50">
+    <div class="overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700">
+      <table class="w-full text-sm min-w-[540px]">
+        <thead class="bg-gray-50 dark:bg-gray-900">
           <tr>
-            <th class="text-left px-4 py-2 font-medium">Destination</th>
-            <th class="px-3 py-2 font-medium">Zone</th>
-            <th class="px-3 py-2 font-medium text-right">USPS GA 1lb</th>
-            <th class="px-3 py-2 font-medium text-right">UPS Ground 1lb</th>
-            <th class="px-3 py-2 font-medium text-right">FedEx Ground 1lb</th>
+            <th class="text-left px-4 py-3 font-semibold text-gray-700 dark:text-gray-300">Weight</th>
+            {destRegions.map(dest => {
+              const zone = ZONE_MATRIX[originRegion][dest];
+              return (
+                <th class="px-3 py-3 font-semibold text-gray-700 dark:text-gray-300 text-right">
+                  {regionLabels[dest]}<br/><span class="font-normal text-xs text-gray-400">Zone {zone}</span>
+                </th>
+              );
+            })}
           </tr>
         </thead>
-        <tbody class="divide-y">
-          {regions.map(destRegion => {
-            const zone = ZONE_MATRIX[originRegion][destRegion];
-            const uspsGA = carriers.find(c => c.id === 'usps-ground-advantage');
-            const upsG  = carriers.find(c => c.id === 'ups-ground');
-            const fedG  = carriers.find(c => c.id === 'fedex-ground');
-            const uspsRate = uspsGA?.rates.find(r => r.oz >= 16)?.zones[zone];
-            const upsRate  = upsG?.rates.find(r => r.oz >= 16)?.zones[zone];
-            const fedRate  = fedG?.rates.find(r => r.oz >= 16)?.zones[zone];
-            return (
-              <tr>
-                <td class="px-4 py-2 font-medium capitalize">{destRegion.replace('-', ' ')}</td>
-                <td class={`px-3 py-2 text-center font-semibold ${zone <= 3 ? 'text-green-700' : zone >= 7 ? 'text-red-600' : 'text-gray-700'}`}>
-                  {zone}
-                </td>
-                <td class="px-3 py-2 text-right">{uspsRate ? `$${uspsRate.toFixed(2)}` : '—'}</td>
-                <td class="px-3 py-2 text-right">{upsRate  ? `$${upsRate.toFixed(2)}`  : '—'}</td>
-                <td class="px-3 py-2 text-right">{fedRate  ? `$${fedRate.toFixed(2)}`  : '—'}</td>
-              </tr>
-            );
-          })}
+        <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+          {weightTiers.map((tier, i) => (
+            <tr class={i % 2 === 0 ? 'bg-white dark:bg-gray-950' : 'bg-gray-50 dark:bg-gray-900'}>
+              <td class="px-4 py-2.5 font-medium text-gray-800 dark:text-gray-200">{tier.label}</td>
+              {destRegions.map(dest => {
+                const zone = ZONE_MATRIX[originRegion][dest];
+                const rate = getRate(uspsGA, tier.oz, zone);
+                return (
+                  <td class="px-3 py-2.5 text-right text-gray-700 dark:text-gray-300">
+                    {rate ? `$${rate.toFixed(2)}` : '—'}
+                  </td>
+                );
+              })}
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
-    <p class="text-xs text-gray-400 mt-2">* Rates shown are 2026 approximate commercial rates for a 1 lb package.</p>
+
+    <!-- UPS Ground table -->
+    <h3 class="text-lg font-bold mt-6 mb-3">UPS Ground from {stateData.name}</h3>
+    <div class="overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700">
+      <table class="w-full text-sm min-w-[540px]">
+        <thead class="bg-gray-50 dark:bg-gray-900">
+          <tr>
+            <th class="text-left px-4 py-3 font-semibold text-gray-700 dark:text-gray-300">Weight</th>
+            {destRegions.map(dest => {
+              const zone = ZONE_MATRIX[originRegion][dest];
+              return (
+                <th class="px-3 py-3 font-semibold text-gray-700 dark:text-gray-300 text-right">
+                  {regionLabels[dest]}<br/><span class="font-normal text-xs text-gray-400">Zone {zone}</span>
+                </th>
+              );
+            })}
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+          {weightTiers.filter(t => t.oz >= 16).map((tier, i) => (
+            <tr class={i % 2 === 0 ? 'bg-white dark:bg-gray-950' : 'bg-gray-50 dark:bg-gray-900'}>
+              <td class="px-4 py-2.5 font-medium text-gray-800 dark:text-gray-200">{tier.label}</td>
+              {destRegions.map(dest => {
+                const zone = ZONE_MATRIX[originRegion][dest];
+                const rate = getRate(upsG, tier.oz, zone);
+                return (
+                  <td class="px-3 py-2.5 text-right text-gray-700 dark:text-gray-300">
+                    {rate ? `$${rate.toFixed(2)}` : '—'}
+                  </td>
+                );
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="text-xs text-gray-400 dark:text-gray-500 mt-2">* UPS Ground does not publish Zone 1 rates — Zone 2 is the starting point for all UPS destinations. Residential surcharge of ~$5.50 applies for home deliveries.</p>
   </div>
 
-  <div class="bg-gray-50 border rounded-xl p-6 max-w-2xl mb-8">
-    <h2 class="font-semibold mb-2">State Tax Info</h2>
-    <p class="text-sm text-gray-600">
-      {stateData.name} state sales tax rate: <strong>{stateData.taxRate}%</strong>.
-      {stateData.taxRate === 0 ? 'No state sales tax applies to online sales originating here.' : 'May apply to certain product categories sold to in-state customers.'}
+  <!-- Carrier comparison summary -->
+  <div class="max-w-3xl mb-10">
+    <h2 class="text-xl font-bold mb-4">USPS vs UPS vs FedEx from {stateData.name}</h2>
+    <div class="overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700">
+      <table class="w-full text-sm">
+        <thead class="bg-gray-50 dark:bg-gray-900">
+          <tr>
+            <th class="text-left px-4 py-3 font-medium text-gray-700 dark:text-gray-300">Carrier</th>
+            <th class="px-3 py-3 font-medium text-gray-700 dark:text-gray-300 text-center">Speed</th>
+            <th class="px-3 py-3 font-medium text-gray-700 dark:text-gray-300 text-center">Best For</th>
+            <th class="px-3 py-3 font-medium text-gray-700 dark:text-gray-300 text-right">1 lb local rate</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+          <tr class="bg-white dark:bg-gray-950">
+            <td class="px-4 py-3 font-semibold text-blue-800 dark:text-blue-400">USPS Ground Advantage</td>
+            <td class="px-3 py-3 text-center text-gray-600 dark:text-gray-400">2–5 days</td>
+            <td class="px-3 py-3 text-center text-gray-600 dark:text-gray-400">Under 1 lb, light packages</td>
+            <td class="px-3 py-3 text-right font-medium">${getRate(uspsGA, 16, selfZone)?.toFixed(2)}</td>
+          </tr>
+          <tr class="bg-gray-50 dark:bg-gray-900">
+            <td class="px-4 py-3 font-semibold text-blue-800 dark:text-blue-400">USPS Priority Mail</td>
+            <td class="px-3 py-3 text-center text-gray-600 dark:text-gray-400">1–3 days</td>
+            <td class="px-3 py-3 text-center text-gray-600 dark:text-gray-400">Speed + flat rate boxes</td>
+            <td class="px-3 py-3 text-right font-medium">${getRate(uspsPM, 16, selfZone)?.toFixed(2)}</td>
+          </tr>
+          <tr class="bg-white dark:bg-gray-950">
+            <td class="px-4 py-3 font-semibold text-amber-800 dark:text-amber-400">UPS Ground</td>
+            <td class="px-3 py-3 text-center text-gray-600 dark:text-gray-400">1–5 days</td>
+            <td class="px-3 py-3 text-center text-gray-600 dark:text-gray-400">Heavy packages, commercial</td>
+            <td class="px-3 py-3 text-right font-medium">${getRate(upsG, 16, selfZone)?.toFixed(2)}</td>
+          </tr>
+          <tr class="bg-gray-50 dark:bg-gray-900">
+            <td class="px-4 py-3 font-semibold text-orange-700 dark:text-orange-400">FedEx Ground</td>
+            <td class="px-3 py-3 text-center text-gray-600 dark:text-gray-400">1–5 days</td>
+            <td class="px-3 py-3 text-center text-gray-600 dark:text-gray-400">Residential Sat. delivery</td>
+            <td class="px-3 py-3 text-right font-medium">${getRate(fedexG, 16, selfZone)?.toFixed(2) ?? '~$10'}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Cities in this state -->
+  <div class="mb-10">
+    <h2 class="text-xl font-bold mb-4">Shipping Rates by City in {stateData.name}</h2>
+    <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+      Select a city below for a detailed shipping rate calculator with live zone lookup from that specific ZIP code.
     </p>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+      {stateData.cities.map(city => (
+        <a
+          href={`/shipping/${stateData.slug}/${city.slug}/`}
+          class="border border-gray-200 dark:border-gray-700 rounded-xl p-4 hover:border-teal-400 dark:hover:border-teal-600 hover:bg-teal-50 dark:hover:bg-teal-950 transition group"
+        >
+          <div class="font-medium text-sm text-gray-800 dark:text-gray-200 group-hover:text-teal-700 dark:group-hover:text-teal-400">{city.name}</div>
+          <div class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">ZIP {city.zip}</div>
+        </a>
+      ))}
+    </div>
   </div>
 
-  <div class="flex gap-3 flex-wrap text-sm">
-    <a href="/shipping/" class="text-blue-700 hover:underline">← All States</a>
-    <a href="/shipping-calculator/" class="text-blue-700 hover:underline">Full Shipping Calculator</a>
-    <a href="/china-shipping/" class="text-blue-700 hover:underline">China Shipping Rates</a>
+  <!-- Shopify shipping tips section -->
+  <div class="max-w-3xl mb-10 bg-gray-50 dark:bg-gray-900 rounded-2xl p-6 border border-gray-200 dark:border-gray-700">
+    <h2 class="text-xl font-bold mb-4">Shopify Shipping from {stateData.name}: Tips for 2026</h2>
+    <div class="space-y-4 text-sm text-gray-700 dark:text-gray-300">
+      <div>
+        <h3 class="font-semibold text-gray-800 dark:text-gray-200 mb-1">Connect your Shopify store to USPS discounts</h3>
+        <p>Shopify merchants in {stateData.name} get up to <strong>88% off USPS rates</strong> and up to <strong>77% off UPS rates</strong> through Shopify Shipping. These commercial discounts are far better than walking into the post office — especially for {stateData.name}'s most competitive shipping routes.</p>
+      </div>
+      <div>
+        <h3 class="font-semibold text-gray-800 dark:text-gray-200 mb-1">Free shipping threshold for {stateData.name} stores</h3>
+        <p>The average free shipping threshold for Shopify stores is $50–$75. For {stateData.name} merchants shipping within the {regionLabel} region at Zone {selfZone} rates, a 1–2 lb order costs $${getRate(uspsGA, 16, selfZone)?.toFixed(2)}–$${getRate(uspsGA, 32, selfZone)?.toFixed(2)} to ship — build this into your product pricing or minimum order threshold. Use our <a href="/free-shipping-threshold/" class="text-teal-700 dark:text-teal-400 hover:underline">free shipping threshold calculator</a>.</p>
+      </div>
+      <div>
+        <h3 class="font-semibold text-gray-800 dark:text-gray-200 mb-1">{stateData.name} sales tax on Shopify</h3>
+        <p>{stateData.taxRate === 0
+          ? `${stateData.name} has no state sales tax, making tax collection simpler for your Shopify store. You may still need to collect taxes in other states where you have nexus.`
+          : `${stateData.name}'s ${stateData.taxRate}% state sales tax rate applies to most physical goods sold to ${stateData.name} customers. Shopify Tax automatically handles ${stateData.name} tax collection and filing. Note that shipping charges are ${stateData.taxRate > 5 ? 'taxable in most cases' : 'sometimes taxable'} in ${stateData.name}.`
+        }</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ section -->
+  <div class="max-w-3xl mb-10">
+    <h2 class="text-xl font-bold mb-6">Frequently Asked Questions — Shipping from {stateData.name}</h2>
+    <div class="space-y-5">
+      <div class="border-b border-gray-200 dark:border-gray-700 pb-5">
+        <h3 class="font-semibold text-gray-800 dark:text-gray-200 mb-2">What is the cheapest way to ship a package from {stateData.name}?</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400">For packages under 1 lb, USPS Ground Advantage is typically the cheapest at $<span>{(repRate ?? 5.49).toFixed(2)}</span>–$11.50 depending on destination. For heavier packages going to nearby {regionLabel} states (Zone {selfZone}), compare USPS and UPS — both are competitive. Use the calculator above to find the cheapest rate for your specific weight and destination.</p>
+      </div>
+      <div class="border-b border-gray-200 dark:border-gray-700 pb-5">
+        <h3 class="font-semibold text-gray-800 dark:text-gray-200 mb-2">How much does it cost to ship from {stateData.name} to California?</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400">Shipping from {stateData.name} to California costs approximately ${getRate(uspsGA, 16, ZONE_MATRIX[originRegion]['west'])?.toFixed(2)} (1 lb, USPS Ground Advantage), ${getRate(upsG, 16, ZONE_MATRIX[originRegion]['west'])?.toFixed(2) ?? 'varies'} (UPS Ground), or ${getRate(uspsPM, 16, ZONE_MATRIX[originRegion]['west'])?.toFixed(2)} (USPS Priority Mail, 1–3 days). California falls in Zone {ZONE_MATRIX[originRegion]['west']} from {stateData.name}.</p>
+      </div>
+      <div class="border-b border-gray-200 dark:border-gray-700 pb-5">
+        <h3 class="font-semibold text-gray-800 dark:text-gray-200 mb-2">Does {stateData.name} sales tax apply to Shopify shipping charges?</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400">{stateData.taxRate === 0 ? `${stateData.name} has no state sales tax — one of only a few US states. This simplifies tax for Shopify merchants shipping from ${stateData.abbr}.` : `${stateData.name}'s ${stateData.taxRate}% state sales tax may apply to shipping charges depending on the product type. Shopify Tax handles this automatically.`}</p>
+      </div>
+      <div class="border-b border-gray-200 dark:border-gray-700 pb-5">
+        <h3 class="font-semibold text-gray-800 dark:text-gray-200 mb-2">How do USPS shipping zones work from {stateData.name}?</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400">{stateData.name} is in the {regionLabel} region. Shipping within the {regionLabel} region is Zone {selfZone}. Shipping cross-country reaches Zone {Math.max(...Object.values(ZONE_MATRIX[originRegion]))}. Higher zones = longer distances = higher rates. USPS zones 1–8 determine price for all weight-based USPS services.</p>
+      </div>
+      <div class="border-b border-gray-200 dark:border-gray-700 pb-5">
+        <h3 class="font-semibold text-gray-800 dark:text-gray-200 mb-2">What is the USPS Ground Advantage rate from {stateData.name} in 2026?</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400">USPS Ground Advantage from {stateData.name}: ${getRate(uspsGA, 16, selfZone)?.toFixed(2)} (1 lb, within {regionLabel}), ${getRate(uspsGA, 80, selfZone)?.toFixed(2)} (5 lb, within {regionLabel}), up to ${getRate(uspsGA, 16, Math.max(...Object.values(ZONE_MATRIX[originRegion])))?.toFixed(2)} (1 lb, cross-country). USPS Ground Advantage replaced First Class Package Service and Parcel Select Ground in 2023.</p>
+      </div>
+      <div class="pb-2">
+        <h3 class="font-semibold text-gray-800 dark:text-gray-200 mb-2">Should I use UPS or FedEx for shipping from {stateData.name}?</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400">UPS Ground and FedEx Ground have very similar rates from {stateData.name}. UPS is slightly better for high-volume commercial accounts. FedEx Home Delivery reaches residential addresses on Saturdays at no extra charge. For packages under 1 lb, USPS beats both. Use the calculator above to compare exact rates for your package size.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shipping content section -->
+  <div class="max-w-3xl mb-10 prose dark:prose-invert prose-sm max-w-none">
+    <h2>Shipping from {stateData.name} — Complete Guide 2026</h2>
+    <p>{stateData.name} ({stateData.abbr}) is located in the {regionLabel} shipping region, which determines your USPS zone for all package shipments. As a Shopify merchant shipping from {stateData.name}, understanding your shipping zones helps you set accurate rates, choose the right carrier, and optimize your free shipping threshold.</p>
+
+    <h3>How to choose the right carrier from {stateData.name}</h3>
+    <p><strong>USPS Ground Advantage</strong> is almost always the best choice for packages under 1 lb shipped from {stateData.name}. For 1–3 lb packages going to nearby {regionLabel} states, USPS Ground Advantage and UPS Ground are competitive — compare using our calculator above. For heavier shipments (10+ lb) going cross-country, UPS and FedEx often offer better rates, especially with commercial account discounts.</p>
+
+    <h3>Shopify Shipping discounts from {stateData.name}</h3>
+    <p>Shopify merchants get pre-negotiated discounts of up to 88% off USPS retail rates and 77% off UPS retail rates through Shopify Shipping. This makes Shopify Shipping one of the best multi-carrier shipping options for {stateData.name} merchants — no minimum volume required.</p>
+
+    <h3>USPS flat rate boxes from {stateData.name}</h3>
+    <p>USPS Priority Mail flat rate boxes ship from {stateData.name} to anywhere in the US for a fixed price regardless of weight: Small Flat Rate Box ($10.60), Medium Flat Rate Box ($17.20), Large Flat Rate Box ($22.00). If your products are dense or heavy, flat rate boxes from {stateData.name} can significantly reduce shipping costs on heavier orders.</p>
+
+    <h3>Dimensional weight pricing from {stateData.name}</h3>
+    <p>UPS and FedEx both use dimensional weight (DIM weight) pricing — if your package is large but light, you pay based on its size rather than actual weight. Calculate your DIM weight: <em>L × W × H ÷ 139</em>. USPS does not apply DIM weight pricing for packages under 1 cubic foot, making it a better choice for bulky-but-light items shipped from {stateData.name}.</p>
+  </div>
+
+  <!-- Nearby states -->
+  {nearbyStates.length > 0 && (
+    <div class="max-w-3xl mb-8">
+      <h2 class="text-lg font-bold mb-3">Nearby States — {regionLabel} Region</h2>
+      <div class="flex flex-wrap gap-2">
+        {nearbyStates.map(s => (
+          <a href={`/shipping/${s.slug}/`} class="px-3 py-1.5 border border-gray-200 dark:border-gray-700 rounded-lg text-sm hover:border-teal-400 hover:text-teal-700 dark:hover:text-teal-400 dark:hover:border-teal-600 transition">
+            {s.name} ({s.abbr})
+          </a>
+        ))}
+      </div>
+    </div>
+  )}
+
+  <!-- Footer CTA -->
+  <div class="max-w-3xl p-4 bg-gray-50 dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-700 text-sm">
+    <p class="font-semibold text-gray-700 dark:text-gray-300 mb-2">More Shipping Tools</p>
+    <div class="flex flex-wrap gap-2">
+      <a href="/shipping-calculator/" class="px-3 py-1.5 bg-teal-50 dark:bg-teal-950 text-teal-700 dark:text-teal-400 rounded-lg border border-teal-200 dark:border-teal-800 hover:shadow-sm">Full Rate Calculator</a>
+      <a href="/dimensional-weight/" class="px-3 py-1.5 bg-teal-50 dark:bg-teal-950 text-teal-700 dark:text-teal-400 rounded-lg border border-teal-200 dark:border-teal-800 hover:shadow-sm">DIM Weight Calculator</a>
+      <a href="/free-shipping-threshold/" class="px-3 py-1.5 bg-teal-50 dark:bg-teal-950 text-teal-700 dark:text-teal-400 rounded-lg border border-teal-200 dark:border-teal-800 hover:shadow-sm">Free Shipping Threshold</a>
+      <a href="/carrier-comparison/" class="px-3 py-1.5 bg-teal-50 dark:bg-teal-950 text-teal-700 dark:text-teal-400 rounded-lg border border-teal-200 dark:border-teal-800 hover:shadow-sm">Carrier Comparison</a>
+      <a href="/china-shipping/" class="px-3 py-1.5 bg-teal-50 dark:bg-teal-950 text-teal-700 dark:text-teal-400 rounded-lg border border-teal-200 dark:border-teal-800 hover:shadow-sm">China Shipping Rates</a>
+      <a href="/shipping/" class="px-3 py-1.5 bg-teal-50 dark:bg-teal-950 text-teal-700 dark:text-teal-400 rounded-lg border border-teal-200 dark:border-teal-800 hover:shadow-sm">← All States</a>
+    </div>
   </div>
 </Base>
+
+<script define:vars={{ originRegion, ZONE_MATRIX: JSON.parse(JSON.stringify(ZONE_MATRIX)) }}>
+  // Rate data embedded from carriers
+  const RATES = {
+    uspsga: {
+      1:  {1:3.79,2:3.79,3:3.95,4:4.16,5:4.50,6:4.80,7:5.10,8:5.45},
+      4:  {1:4.29,2:4.29,3:4.55,4:4.85,5:5.30,6:5.75,7:6.20,8:6.75},
+      8:  {1:4.79,2:4.79,3:5.25,4:5.75,5:6.35,6:7.00,7:7.65,8:8.30},
+      12: {1:5.19,2:5.19,3:5.85,4:6.50,5:7.30,6:8.20,7:9.10,8:9.95},
+      16: {1:5.49,2:5.49,3:6.35,4:7.10,5:8.10,6:9.20,7:10.35,8:11.50},
+      32: {1:6.35,2:6.35,3:7.45,4:8.50,5:9.90,6:11.50,7:13.00,8:14.60},
+      48: {1:7.20,2:7.20,3:8.55,4:9.90,5:11.70,6:13.80,7:15.65,8:17.70},
+      80: {1:9.25,2:9.25,3:11.20,4:13.20,5:15.80,6:18.90,7:21.50,8:24.50},
+      160:{1:14.50,2:14.50,3:18.50,4:22.50,5:27.50,6:33.50,7:38.50,8:44.00},
+      320:{1:25.50,2:25.50,3:33.00,4:41.00,5:51.00,6:63.00,7:73.00,8:84.00},
+    },
+    uspspm: {
+      16: {1:8.50,2:8.50,3:9.10,4:9.55,5:10.40,6:11.20,7:12.15,8:13.25},
+      32: {1:9.35,2:9.35,3:10.15,4:11.05,5:12.45,6:13.85,7:15.70,8:17.70},
+      48: {1:10.20,2:10.20,3:11.20,4:12.55,5:14.50,6:16.50,7:19.25,8:22.15},
+      80: {1:12.55,2:12.55,3:14.55,4:16.70,5:19.45,6:22.90,7:26.75,8:30.90},
+      160:{1:19.30,2:19.30,3:21.65,4:25.55,5:31.00,6:37.60,7:44.55,8:52.35},
+      320:{1:34.50,2:34.50,3:39.50,4:47.50,5:58.00,6:71.00,7:84.00,8:99.00},
+    },
+    ups: {
+      16: {2:9.50,3:10.25,4:10.95,5:12.25,6:13.75,7:15.25,8:17.00},
+      32: {2:10.75,3:11.75,4:12.75,5:14.50,6:16.50,7:18.50,8:20.75},
+      48: {2:11.50,3:12.75,4:13.95,5:16.00,6:18.50,7:21.00,8:23.75},
+      80: {2:12.50,3:13.80,4:15.25,5:17.50,6:20.25,7:23.50,8:27.00},
+      160:{2:16.50,3:18.50,4:20.50,5:24.50,6:29.00,7:34.50,8:40.50},
+      320:{2:22.50,3:25.50,4:28.50,5:34.50,6:41.50,7:50.00,8:59.00},
+    },
+    fedex: {
+      16: {2:9.75,3:10.50,4:11.25,5:12.50,6:14.00,7:15.50,8:17.25},
+      32: {2:11.00,3:12.00,4:13.00,5:14.75,6:16.75,7:18.75,8:21.25},
+      48: {2:11.75,3:13.00,4:14.25,5:16.25,6:18.75,7:21.25,8:24.25},
+      80: {2:12.75,3:14.25,4:15.75,5:18.00,6:20.75,7:24.00,8:27.50},
+      160:{2:17.00,3:19.00,4:21.00,5:25.00,6:29.75,7:35.00,8:41.00},
+      320:{2:23.00,3:26.25,4:29.25,5:35.25,6:42.50,7:51.00,8:60.00},
+    },
+  };
+
+  function getRate(table, oz, zone) {
+    const ozKeys = Object.keys(table).map(Number).sort((a,b)=>a-b);
+    const key = ozKeys.find(k => k >= oz) || ozKeys[ozKeys.length-1];
+    return table[key]?.[zone] ?? null;
+  }
+
+  function calcRates() {
+    const oz = parseInt(document.getElementById('calcWeight').value);
+    const dest = document.getElementById('calcDest').value;
+    const zone = ZONE_MATRIX[originRegion][dest];
+
+    const r = {
+      uspsga: getRate(RATES.uspsga, oz, zone),
+      uspspm: getRate(RATES.uspspm, oz, zone),
+      ups:    getRate(RATES.ups,    oz, zone),
+      fedex:  getRate(RATES.fedex,  oz, zone),
+    };
+
+    document.getElementById('r-uspsga').textContent = r.uspsga ? '$' + r.uspsga.toFixed(2) : '—';
+    document.getElementById('r-uspspm').textContent = r.uspspm ? '$' + r.uspspm.toFixed(2) : '—';
+    document.getElementById('r-ups').textContent    = r.ups    ? '$' + r.ups.toFixed(2)    : '—';
+    document.getElementById('r-fedex').textContent  = r.fedex  ? '$' + r.fedex.toFixed(2)  : '—';
+    document.getElementById('calcZone').textContent = `Zone ${zone} (shipping to ${dest.charAt(0).toUpperCase() + dest.slice(1)}). Rates are approximate 2026 commercial rates.`;
+
+    // Highlight cheapest
+    const vals = [
+      {id:'r-uspsga', v: r.uspsga},
+      {id:'r-uspspm', v: r.uspspm},
+      {id:'r-ups',    v: r.ups},
+      {id:'r-fedex',  v: r.fedex},
+    ].filter(x => x.v !== null);
+    const minV = Math.min(...vals.map(x => x.v));
+    vals.forEach(x => {
+      const el = document.getElementById(x.id);
+      if (x.v === minV) {
+        el.className = 'text-lg font-bold text-green-600 dark:text-green-400';
+      } else {
+        el.className = 'text-lg font-bold text-teal-700 dark:text-teal-400';
+      }
+    });
+  }
+
+  // Auto-calculate on page load
+  document.addEventListener('DOMContentLoaded', calcRates);
+</script>
