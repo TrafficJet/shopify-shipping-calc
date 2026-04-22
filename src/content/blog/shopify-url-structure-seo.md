@@ -6,6 +6,8 @@ description: "Learn how to optimize Shopify URL structure for SEO. Fix duplicate
 author: "Alex Morgan"
 tags: ["shopify url structure seo"]
 seoTitle: "Shopify URL Structure SEO: Complete 2026 Guide | Shopify Playbook"
+heroImage: "/images/shopify-url-structure-seo/hero.jpg"
+heroImageAlt: "Shopify store dashboard showing product URLs and SEO settings on desktop screen"
 ---
 
 # Shopify URL Structure SEO: Complete 2026 Guide
