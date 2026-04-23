@@ -6,6 +6,8 @@ description: "Connect Shopify to TikTok Shop in 30-45 minutes. Step-by-step setu
 author: "Alex Morgan"
 tags: ["shopify tiktok shop integration"]
 seoTitle: "Shopify TikTok Shop Integration: Complete 2026 Guide"
+heroImage: "/images/shopify-tiktok-shop-integration/hero.jpg"
+heroImageAlt: "Shopify seller syncing product catalog to TikTok Shop on mobile dashboard"
 ---
 
 # Shopify TikTok Shop Integration: Complete 2026 Guide
