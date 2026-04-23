@@ -6,6 +6,8 @@ description: "Learn how to customize your Shopify checkout in 2026. From brandin
 author: "Alex Morgan"
 tags: ["shopify checkout customization"]
 seoTitle: "Shopify Checkout Customization: Complete 2026 Guide"
+heroImage: "/images/shopify-checkout-customization/hero.jpg"
+heroImageAlt: "Shopify checkout customization interface displayed on laptop screen showing branding options"
 ---
 
 # Shopify Checkout Customization: Complete 2026 Guide
