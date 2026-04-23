@@ -11,10 +11,15 @@ const canon = canonicalUrl || Astro.url.href;
 const finalOgImage = ogImage || 'https://shopify-shipping-calc.com/og-default.png';
 const GA_ID = 'G-QT3RQMZ56J';
 const webAppSchemaJson = JSON.stringify({"@context":"https://schema.org","@type":"WebApplication","name":"Shopify Shipping Calculator","url":"https://shopify-shipping-calc.com/","description":"Free Shopify shipping calculator. Compare USPS, UPS, FedEx, and DHL rates. Calculate dimensional weight, free shipping thresholds, and carrier costs for your store.","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}});
+const _path = new URL(canon).pathname;
+const breadcrumbJson = _path !== '/' ? JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ShipCalc","item":"https://shopify-shipping-calc.com/"},{"@type":"ListItem","position":2,"name":title.split(' — ')[0].split(' | ')[0].trim(),"item":canon}]}) : null;
 ---
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script is:inline>
+(function(){if(location.hostname.endsWith('.pages.dev')){document.head.insertAdjacentHTML('beforeend','<meta name="robots" content="noindex,nofollow">');location.replace(location.href.replace(location.hostname,'shopify-shipping-calc.com'));}})();
+</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0d9488" />
@@ -38,6 +43,7 @@ const webAppSchemaJson = JSON.stringify({"@context":"https://schema.org","@type"
   <link rel="dns-prefetch" href="https://www.google-analytics.com" />
   <slot name="head" />
   {!noWebAppSchema && <script type="application/ld+json" set:html={webAppSchemaJson} />}
+  {breadcrumbJson && <script type="application/ld+json" set:html={breadcrumbJson} />}
   <script is:inline>
     (function() {
       var saved = localStorage.getItem('theme');
@@ -87,6 +93,10 @@ const webAppSchemaJson = JSON.stringify({"@context":"https://schema.org","@type"
           <li><a href="/privacy/" class="hover:text-teal-700 dark:hover:text-teal-400">Privacy</a></li>
           <li><a href="/terms/" class="hover:text-teal-700 dark:hover:text-teal-400">Terms</a></li>
           <li><a href="/about/" class="hover:text-teal-700 dark:hover:text-teal-400">About</a></li>
+          <li class="text-gray-300 dark:text-gray-700">|</li>
+          <li><a href="https://shopify-fee-calc.com/" class="hover:text-teal-700 dark:hover:text-teal-400">Shopify Fee Calc</a></li>
+          <li><a href="https://commission-calc.com/" class="hover:text-teal-700 dark:hover:text-teal-400">Commission Calc</a></li>
+          <li><a href="https://app-compare.com/" class="hover:text-teal-700 dark:hover:text-teal-400">App Compare</a></li>
         </ul>
       </div>
       <p class="text-xs text-gray-400 dark:text-gray-500 leading-relaxed">
