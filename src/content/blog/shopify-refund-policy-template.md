@@ -6,6 +6,8 @@ description: "Get a free, copy-and-paste Shopify refund policy template. Customi
 author: "Alex Morgan"
 tags: ["shopify refund policy template"]
 seoTitle: "Shopify Refund Policy Template: Free & Ready to Use"
+heroImage: "/images/shopify-refund-policy-template/hero.jpg"
+heroImageAlt: "Shopify store displaying clear refund policy on product page"
 ---
 
 # Shopify Refund Policy Template: Free & Ready to Use
