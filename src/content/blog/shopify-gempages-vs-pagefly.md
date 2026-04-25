@@ -6,6 +6,8 @@ description: "Compare GemPages vs PageFly: pricing, speed, A/B testing & feature
 author: "Alex Morgan"
 tags: ["shopify gempages vs pagefly"]
 seoTitle: "GemPages vs PageFly: Best Shopify Page Builder 2026"
+heroImage: "/images/shopify-gempages-vs-pagefly/hero.jpg"
+heroImageAlt: "Shopify page builder interface displayed on laptop showing drag-and-drop design tools"
 ---
 
 # GemPages vs PageFly: Best Shopify Page Builder 2026
