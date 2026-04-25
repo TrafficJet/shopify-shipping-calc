@@ -6,6 +6,8 @@ description: "Complete Shopify Recharge guide: install, configure, and optimize 
 author: "Alex Morgan"
 tags: ["shopify recharge subscriptions guide"]
 seoTitle: "Shopify Recharge Subscriptions Guide 2026 | Setup & Optimization"
+heroImage: "/images/shopify-recharge-subscriptions-guide/hero.jpg"
+heroImageAlt: "Shopify store dashboard displaying subscription management and recurring revenue metrics"
 ---
 
 # Shopify Recharge Subscriptions Guide (2026)
