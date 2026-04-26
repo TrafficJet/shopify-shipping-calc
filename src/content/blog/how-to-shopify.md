@@ -6,6 +6,8 @@ description: "Learn how to use Shopify in 2026. Step-by-step guide to set up you
 author: "Alex Morgan"
 tags: ["how to shopify"]
 seoTitle: "How to Use Shopify: Complete Beginner's Guide 2026"
+heroImage: "/images/how-to-shopify/hero.jpg"
+heroImageAlt: "Shopify admin dashboard displayed on laptop screen showing products and store management"
 ---
 
 # How to Use Shopify: Complete Beginner's Guide 2026
