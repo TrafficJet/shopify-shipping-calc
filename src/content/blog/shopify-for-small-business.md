@@ -6,6 +6,8 @@ description: "Complete Shopify small business guide for 2026. Real costs, featur
 author: "Alex Morgan"
 tags: ["shopify for small business"]
 seoTitle: "Shopify for Small Business: 2026 Honest Costs & Features Guide"
+heroImage: "/images/shopify-for-small-business/hero.jpg"
+heroImageAlt: "Small business owner setting up an online store on a laptop"
 ---
 
 # Shopify for Small Business: Honest 2026 Guide
