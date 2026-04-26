@@ -6,6 +6,8 @@ description: "Learn what Shopify is, how it works, pricing plans in 2026, and ke
 author: "Alex Morgan"
 tags: ["what is shopify"]
 seoTitle: "What Is Shopify? Plain-English Guide for 2026"
+heroImage: "/images/what-is-shopify/hero.jpg"
+heroImageAlt: "Shopify admin dashboard displayed on laptop showing orders and analytics"
 ---
 
 # What Is Shopify? Plain-English Guide for 2026
