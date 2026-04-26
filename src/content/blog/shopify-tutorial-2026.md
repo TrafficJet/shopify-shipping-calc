@@ -6,6 +6,8 @@ description: "Complete Shopify tutorial 2026 for beginners. Learn to sign up, ch
 author: "Alex Morgan"
 tags: ["shopify tutorial 2026"]
 seoTitle: "Shopify Tutorial 2026: Build Your Store Step by Step | Shopify Shipping Calc"
+heroImage: "/images/shopify-tutorial-2026/hero.jpg"
+heroImageAlt: "Shopify admin dashboard displayed on laptop screen showing store setup interface"
 ---
 
 # Shopify Tutorial 2026: Build Your Store Step by Step
