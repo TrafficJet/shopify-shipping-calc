@@ -6,6 +6,8 @@ description: "Avoid 9 costly ecommerce mistakes in 2026. Fix slow sites, broken 
 author: "Alex Morgan"
 tags: ["ecommerce mistakes to avoid"]
 seoTitle: "Ecommerce Mistakes to Avoid in 2026 | Shopify Shipping Calc"
+heroImage: "/images/ecommerce-mistakes-to-avoid/hero.jpg"
+heroImageAlt: "Customer completing purchase on mobile phone during checkout process"
 ---
 
 # Ecommerce Mistakes to Avoid in 2026
