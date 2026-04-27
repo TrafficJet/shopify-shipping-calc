@@ -6,6 +6,8 @@ description: "Step-by-step guide to launching a profitable ecommerce business in
 author: "Alex Morgan"
 tags: ["how to ecommerce"]
 seoTitle: "How to Start an Ecommerce Business in 2026 | Shopify Shipping Calc"
+heroImage: "/images/how-to-ecommerce/hero.jpg"
+heroImageAlt: "Ecommerce store checkout page displayed on laptop with products visible"
 ---
 
 # How to Start an Ecommerce Business in 2026
