@@ -6,6 +6,8 @@ description: "Master 8 core ecommerce best practices for 2026: site speed, produ
 author: "Alex Morgan"
 tags: ["ecommerce best practices"]
 seoTitle: "Ecommerce Best Practices That Drive Sales in 2026 | Shopify Shipping Calc"
+heroImage: "/images/ecommerce-best-practices/hero.jpg"
+heroImageAlt: "Customer completing purchase on mobile device with fast loading checkout page"
 ---
 
 # Ecommerce Best Practices That Drive Sales in 2026
