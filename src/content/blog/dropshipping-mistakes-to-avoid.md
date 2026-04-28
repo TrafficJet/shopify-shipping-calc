@@ -6,6 +6,8 @@ description: "Avoid the 7 most common dropshipping mistakes. Learn supplier vett
 author: "Alex Morgan"
 tags: ["dropshipping mistakes to avoid"]
 seoTitle: "Dropshipping Mistakes to Avoid in 2026 | Shopify Shipping Calc"
+heroImage: "/images/dropshipping-mistakes-to-avoid/hero.jpg"
+heroImageAlt: "Worker inspecting product quality and packaging in a dropshipping warehouse"
 ---
 
 # Dropshipping Mistakes to Avoid in 2026
