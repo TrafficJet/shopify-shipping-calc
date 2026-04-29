@@ -6,6 +6,8 @@ description: "Avoid 8 costly POD errors: low-res artwork, profit margin miscalcu
 author: "Alex Morgan"
 tags: ["print on demand mistakes to avoid"]
 seoTitle: "Print on Demand Mistakes to Avoid in 2026 | Shopify Shipping Calc"
+heroImage: "/images/print-on-demand-mistakes-to-avoid/hero.jpg"
+heroImageAlt: "Quality control inspector examining printed t-shirt for defects and print clarity"
 ---
 
 # Print on Demand Mistakes to Avoid in 2026
