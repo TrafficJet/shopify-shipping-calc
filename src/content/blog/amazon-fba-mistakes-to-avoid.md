@@ -6,6 +6,8 @@ description: "Learn the 9 most costly Amazon FBA mistakes sellers make and how t
 author: "Alex Morgan"
 tags: ["amazon fba mistakes to avoid"]
 seoTitle: "Amazon FBA Mistakes to Avoid in 2026 | Shopify Shipping Calc"
+heroImage: "/images/amazon-fba-mistakes-to-avoid/hero.jpg"
+heroImageAlt: "Amazon FBA seller checking inventory in warehouse with boxes and shelving"
 ---
 
 # Amazon FBA Mistakes to Avoid in 2026
