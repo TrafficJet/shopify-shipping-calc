@@ -6,6 +6,8 @@ description: "Avoid 8 critical e-commerce mistakes that cause 90% of online stor
 author: "Alex Morgan"
 tags: ["online store mistakes to avoid"]
 seoTitle: "Online Store Mistakes to Avoid in 2026 | Shopify Shipping Calc"
+heroImage: "/images/online-store-mistakes-to-avoid/hero.jpg"
+heroImageAlt: "Mobile phone displaying slow loading ecommerce product page with loading spinner"
 ---
 
 # Online Store Mistakes to Avoid in 2026
