@@ -6,6 +6,8 @@ description: "Master Shopify best practices for 2026: theme selection, Core Web 
 author: "Alex Morgan"
 tags: ["shopify store best practices"]
 seoTitle: "Shopify Store Best Practices to Boost Sales in 2026 | Guide"
+heroImage: "/images/shopify-store-best-practices/hero.jpg"
+heroImageAlt: "Shopify store dashboard displayed on mobile phone with product listings and checkout"
 ---
 
 # Shopify Store Best Practices to Boost Sales in 2026
