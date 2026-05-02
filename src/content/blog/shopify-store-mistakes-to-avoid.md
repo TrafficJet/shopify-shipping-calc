@@ -6,6 +6,8 @@ description: "Discover 10 costly Shopify mistakes draining revenue from US selle
 author: "Alex Morgan"
 tags: ["shopify store mistakes to avoid"]
 seoTitle: "Shopify Store Mistakes to Avoid in 2026 | Guide"
+heroImage: "/images/shopify-store-mistakes-to-avoid/hero.jpg"
+heroImageAlt: "Shopify store displayed on mobile phone showing product cart and checkout flow"
 ---
 
 # Shopify Store Mistakes to Avoid in 2026
