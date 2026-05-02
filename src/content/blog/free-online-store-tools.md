@@ -6,6 +6,8 @@ description: "Discover the best free online store tools for 2026—store builder
 author: "Alex Morgan"
 tags: ["free online store tools"]
 seoTitle: "Free Online Store Tools 2026 | Shopify Shipping Calc"
+heroImage: "/images/free-online-store-tools/hero.jpg"
+heroImageAlt: "Person viewing online store dashboard with sales metrics and inventory data on laptop"
 ---
 
 # Best Free Online Store Tools for 2026
