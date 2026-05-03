@@ -6,6 +6,8 @@ description: "Learn the 8 most common Shopify app mistakes costing merchants rea
 author: "Alex Morgan"
 tags: ["shopify app mistakes to avoid"]
 seoTitle: "Shopify App Mistakes to Avoid in 2026 | Shopify Shipping Calc"
+heroImage: "/images/shopify-app-mistakes-to-avoid/hero.jpg"
+heroImageAlt: "Shopify admin dashboard showing multiple installed apps and performance metrics"
 ---
 
 # Shopify App Mistakes to Avoid in 2026
