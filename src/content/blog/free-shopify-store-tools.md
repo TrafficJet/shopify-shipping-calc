@@ -6,6 +6,8 @@ description: "Best free Shopify tools for design, SEO, email, analytics & more. 
 author: "Alex Morgan"
 tags: ["free shopify store tools"]
 seoTitle: "Free Shopify Store Tools to Grow Sales in 2026 | Shopify Shipping Calc"
+heroImage: "/images/free-shopify-store-tools/hero.jpg"
+heroImageAlt: "Shopify store admin dashboard displayed on laptop showing product management and store settings"
 ---
 
 # Best Free Shopify Store Tools to Grow Sales in 2026
