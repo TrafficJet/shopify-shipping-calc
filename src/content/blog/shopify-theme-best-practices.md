@@ -6,6 +6,8 @@ description: "Master Shopify theme best practices for 2026: optimize speed, mobi
 author: "Alex Morgan"
 tags: ["shopify theme best practices"]
 seoTitle: "Shopify Theme Best Practices 2026 | Performance & Speed Guide"
+heroImage: "/images/shopify-theme-best-practices/hero.jpg"
+heroImageAlt: "Shopify theme editor interface showing customization options on desktop monitor"
 ---
 
 # Shopify Theme Best Practices for 2026
