@@ -6,6 +6,8 @@ description: "Discover the best free Shopify apps for email marketing, reviews, 
 author: "Alex Morgan"
 tags: ["free shopify app tools"]
 seoTitle: "Best Free Shopify App Tools to Grow Your Store | Shopify Shipping Calc"
+heroImage: "/images/free-shopify-app-tools/hero.jpg"
+heroImageAlt: "Shopify App Store dashboard displayed on laptop showing free app tools and integrations"
 ---
 
 # Best Free Shopify App Tools to Grow Your Store
