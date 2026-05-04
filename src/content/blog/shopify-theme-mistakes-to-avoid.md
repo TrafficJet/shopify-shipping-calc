@@ -6,6 +6,8 @@ description: "Avoid 9 critical Shopify theme mistakes that tank conversions. Lea
 author: "Alex Morgan"
 tags: ["shopify theme mistakes to avoid"]
 seoTitle: "Shopify Theme Mistakes to Avoid in 2026 | Performance & Design"
+heroImage: "/images/shopify-theme-mistakes-to-avoid/hero.jpg"
+heroImageAlt: "Mobile phone displaying slow-loading Shopify store with loading spinner"
 ---
 
 # Shopify Theme Mistakes to Avoid in 2026
