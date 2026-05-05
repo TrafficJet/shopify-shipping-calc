@@ -6,6 +6,8 @@ description: "Discover the best free Shopify theme tools for customizing, optimi
 author: "Alex Morgan"
 tags: ["free shopify theme tools"]
 seoTitle: "Free Shopify Theme Tools 2026 | Complete Guide"
+heroImage: "/images/free-shopify-theme-tools/hero.jpg"
+heroImageAlt: "Shopify store owner customizing theme sections and colors in the Theme Editor dashboard"
 ---
 
 # Best Free Shopify Theme Tools for 2026
