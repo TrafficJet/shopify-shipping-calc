@@ -6,6 +6,8 @@ description: "Master Shopify Payments with setup tips, fraud prevention, checkou
 author: "Alex Morgan"
 tags: ["shopify payments best practices"]
 seoTitle: "Shopify Payments Best Practices 2026 | Setup, Fraud Prevention & Optimization"
+heroImage: "/images/shopify-payments-best-practices/hero.jpg"
+heroImageAlt: "Shopify admin dashboard showing Payments settings configuration screen"
 ---
 
 # Shopify Payments Best Practices for 2026
