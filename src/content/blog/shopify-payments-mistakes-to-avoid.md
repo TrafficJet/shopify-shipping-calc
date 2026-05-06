@@ -6,6 +6,8 @@ description: "Learn 9 critical Shopify Payments mistakes that cause frozen payou
 author: "Vladislav T."
 tags: ["shopify payments mistakes to avoid"]
 seoTitle: "Shopify Payments Mistakes to Avoid in 2026 | Shopify Shipping Calc"
+heroImage: "/images/shopify-payments-mistakes-to-avoid/hero.jpg"
+heroImageAlt: "Shopify Payments settings page displayed on laptop screen showing account configuration fields"
 ---
 
 # Shopify Payments Mistakes to Avoid in 2026
