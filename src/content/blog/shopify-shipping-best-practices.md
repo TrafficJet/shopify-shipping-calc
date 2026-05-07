@@ -6,6 +6,8 @@ description: "Master Shopify shipping zones, rates, and carrier discounts. Cut c
 author: "Vladislav T."
 tags: ["shopify shipping best practices"]
 seoTitle: "Shopify Shipping Best Practices 2026 | Complete Guide"
+heroImage: "/images/shopify-shipping-best-practices/hero.jpg"
+heroImageAlt: "Shopify admin dashboard displaying shipping zones and rate configuration settings"
 ---
 
 # Shopify Shipping Best Practices for 2026
