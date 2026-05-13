@@ -6,6 +6,8 @@ description: "Fix the 10 most costly Shopify shipping mistakes US stores make. A
 author: "Vladislav T."
 tags: ["shopify shipping mistakes to avoid"]
 seoTitle: "Shopify Shipping Mistakes to Avoid in 2026 | 10 Costly Errors"
+heroImage: "/images/shopify-shipping-mistakes-to-avoid/hero.jpg"
+heroImageAlt: "Shopify Admin dashboard showing shipping zones and carrier rates setup"
 ---
 
 # Shopify Shipping Mistakes to Avoid in 2026
