@@ -6,6 +6,8 @@ description: "Discover 9 common Shopify shipping errors costing you sales. Learn
 author: "Vladislav T."
 tags: ["shopify shipping mistakes to avoid"]
 seoTitle: "Shopify Shipping Mistakes to Avoid in 2026 | Guide"
+heroImage: "/images/shopify-shipping-mistakes-to-avoid/hero.jpg"
+heroImageAlt: "Shopify shipping settings panel open on desktop showing carrier rates and shipping profiles"
 ---
 
 # Shopify Shipping Mistakes to Avoid in 2026
