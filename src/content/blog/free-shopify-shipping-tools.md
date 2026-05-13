@@ -6,6 +6,8 @@ description: "Compare top free Shopify shipping tools for labels, tracking & rat
 author: "Vladislav T."
 tags: ["free shopify shipping tools"]
 seoTitle: "Best Free Shopify Shipping Tools 2026 | No Subscriptions"
+heroImage: "/images/free-shopify-shipping-tools/hero.jpg"
+heroImageAlt: "Shopify store owner printing shipping labels from the admin dashboard"
 ---
 
 # Best Free Shopify Shipping Tools in 2026
