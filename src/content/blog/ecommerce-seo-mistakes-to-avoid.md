@@ -6,6 +6,8 @@ description: "Avoid 8 costly ecommerce SEO mistakes that waste crawl budget, kil
 author: "Vladislav T."
 tags: ["ecommerce seo mistakes to avoid"]
 seoTitle: "Ecommerce SEO Mistakes to Avoid in 2026 | Shopify Shipping Calc"
+heroImage: "/images/ecommerce-seo-mistakes-to-avoid/hero.jpg"
+heroImageAlt: "Ecommerce analytics dashboard showing traffic metrics and SEO performance data on laptop monitor"
 ---
 
 # Ecommerce SEO Mistakes to Avoid in 2026
