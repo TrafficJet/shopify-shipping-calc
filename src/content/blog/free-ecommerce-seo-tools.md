@@ -6,6 +6,8 @@ description: "Discover the best free ecommerce SEO tools for 2026. Keyword resea
 author: "Vladislav T."
 tags: ["free ecommerce seo tools"]
 seoTitle: "Best Free Ecommerce SEO Tools in 2026 | Shopify Shipping Calc"
+heroImage: "/images/free-ecommerce-seo-tools/hero.jpg"
+heroImageAlt: "Ecommerce store owner reviewing SEO metrics and keyword rankings on laptop dashboard"
 ---
 
 # Best Free Ecommerce SEO Tools in 2026
