@@ -6,6 +6,8 @@ description: "Master product listing best practices with proven strategies for t
 author: "Vladislav T."
 tags: ["product listing best practices"]
 seoTitle: "Product Listing Best Practices That Drive More Sales | Shopify Shipping Calc"
+heroImage: "/images/product-listing-best-practices/hero.jpg"
+heroImageAlt: "Shopper browsing product listings on mobile phone with images and descriptions visible"
 ---
 
 # Product Listing Best Practices That Drive More Sales
