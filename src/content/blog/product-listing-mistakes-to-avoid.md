@@ -6,6 +6,8 @@ description: "Avoid costly product listing errors: weak titles, poor images, vag
 author: "Vladislav T."
 tags: ["product listing mistakes to avoid"]
 seoTitle: "Product Listing Mistakes to Avoid in 2026 | Shopify Shipping Calc"
+heroImage: "/images/product-listing-mistakes-to-avoid/hero.jpg"
+heroImageAlt: "E-commerce product listing displayed on laptop screen showing optimized title, images, and description"
 ---
 
 # Product Listing Mistakes to Avoid in 2026
