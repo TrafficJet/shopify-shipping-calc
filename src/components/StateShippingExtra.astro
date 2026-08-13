@@ -1,0 +1,43 @@
+---
+interface Props {
+  name: string;
+  abbr: string;
+  slug: string;
+  regionLabel: string;
+}
+const { name, abbr, slug, regionLabel } = Astro.props;
+const nonContiguous = ['hawaii', 'alaska'].includes(slug);
+---
+{nonContiguous && (
+  <div class="max-w-3xl mb-10 p-5 rounded-2xl border border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-950/40">
+    <h2 class="text-lg font-bold text-amber-900 dark:text-amber-100 mb-2">Why shipping to and from {name} costs more</h2>
+    <p class="text-sm text-amber-900/90 dark:text-amber-100/90 leading-relaxed">
+      {name} sits outside the contiguous 48 states, so every package travels part of the way by air or ocean freight.
+      UPS and FedEx primarily use <strong>air services</strong> to reach {abbr}  -  standard Ground is limited or unavailable  -  so their rates run well above mainland Ground.
+      <strong>USPS is usually the most affordable option</strong> to and from {name}: Priority Mail and Ground Advantage use flat, zone-based pricing regardless of the air leg, and Priority Mail <strong>Flat Rate boxes ship for one price no matter the weight</strong>.
+      Many carriers also add an extended-area or Alaska/Hawaii surcharge, so expect rates roughly 2-4x higher than an equivalent mainland shipment. Always compare USPS flat-rate options first, and use the calculator above before you commit to a carrier.
+    </p>
+  </div>
+)}
+
+<div class="max-w-3xl mb-10">
+  <h2 class="text-xl font-bold mb-6">More Shipping Questions  -  {name}</h2>
+  <div class="space-y-5">
+    <div class="border-b border-gray-200 dark:border-gray-700 pb-5">
+      <h3 class="font-semibold text-gray-800 dark:text-gray-200 mb-2">How long does shipping from {name} take?</h3>
+      <p class="text-sm text-gray-600 dark:text-gray-400">Transit time from {name} depends on distance (your USPS zone). USPS Ground Advantage delivers in 2-5 business days and USPS Priority Mail in 1-3 business days. UPS Ground and FedEx Ground take 1-5 business days  -  nearby {regionLabel} states arrive in 1-2 days, while cross-country shipments take 4-5. For guaranteed dates, UPS/FedEx air and USPS Priority Mail Express deliver in 1-2 days at premium rates.</p>
+    </div>
+    <div class="border-b border-gray-200 dark:border-gray-700 pb-5">
+      <h3 class="font-semibold text-gray-800 dark:text-gray-200 mb-2">Is there a weight or size limit for packages shipped from {name}?</h3>
+      <p class="text-sm text-gray-600 dark:text-gray-400">USPS Ground Advantage and Priority Mail cap out at 70 lb and 130 inches in combined length + girth. UPS and FedEx Ground accept packages up to 150 lb and 165 inches length + girth, with a maximum length of 108 inches. Packages over 50 lb, longer than 48 inches, or with a longest side over 96 inches usually trigger UPS/FedEx "Additional Handling" or "Large Package" surcharges  -  factor these in when you set your {abbr} shipping rates.</p>
+    </div>
+    <div class="border-b border-gray-200 dark:border-gray-700 pb-5">
+      <h3 class="font-semibold text-gray-800 dark:text-gray-200 mb-2">What items are restricted or add surcharges when shipping from {name}?</h3>
+      <p class="text-sm text-gray-600 dark:text-gray-400">Hazardous materials (aerosols, perfumes, nail polish), lithium batteries, and flammable liquids face restrictions and hazmat fees with every carrier; standard commercial goods ship without issue. The most common avoidable surcharges are dimensional-weight pricing on large-but-light boxes, additional-handling fees on oversized items, and residential-delivery or fuel surcharges from UPS and FedEx. USPS charges no residential or fuel surcharge, which often makes it the cheaper choice for small parcels from {name}.</p>
+    </div>
+    <div class="pb-2">
+      <h3 class="font-semibold text-gray-800 dark:text-gray-200 mb-2">What tools help calculate shipping costs from {name}?</h3>
+      <p class="text-sm text-gray-600 dark:text-gray-400">Use the calculator at the top of this page to compare live USPS, UPS, FedEx, and DHL rates from {name} by weight and destination zone. For international orders, add customs duties and taxes (DHL and UPS provide landed-cost estimators). If you're still sourcing the product you're about to ship, <a href="https://supply-rank.com/" class="text-teal-700 dark:text-teal-400 hover:underline font-medium">SupplyRank</a> helps you find verified wholesale suppliers so your landed cost  -  product plus shipping  -  stays competitive.</p>
+    </div>
+  </div>
+</div>
