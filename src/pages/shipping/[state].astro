@@ -1,5 +1,6 @@
 ---
 import Base from "../../layouts/Base.astro";
+import StateShippingExtra from "../../components/StateShippingExtra.astro";
 import { states, ZONE_MATRIX } from "../../data/states-cities";
 import { carriers } from "../../data/carriers-rates";
 
@@ -455,7 +456,7 @@ const breadcrumbSchema = JSON.stringify({
     <h3>Dimensional weight pricing from {stateData.name}</h3>
     <p>UPS and FedEx both use dimensional weight (DIM weight) pricing — if your package is large but light, you pay based on its size rather than actual weight. Calculate your DIM weight: <em>L × W × H ÷ 139</em>. USPS does not apply DIM weight pricing for packages under 1 cubic foot, making it a better choice for bulky-but-light items shipped from {stateData.name}.</p>
   </div>
-
+  <StateShippingExtra name={stateData.name} abbr={stateData.abbr} slug={stateData.slug} regionLabel={regionLabel} />
   <!-- Nearby states -->
   {nearbyStates.length > 0 && (
     <div class="max-w-3xl mb-8">
