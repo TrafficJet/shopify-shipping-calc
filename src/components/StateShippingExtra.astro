@@ -22,18 +22,6 @@ const cityList = (cities || []).slice(0, 6);
   </div>
 )}
 
-{cityList.length > 0 && (
-  <div class="max-w-3xl mb-10">
-    <h2 class="text-xl font-bold mb-3">Shipping rates by city in {name}</h2>
-    <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Shipping cost from {name} depends on the USPS zone of your origin ZIP, so rates differ city to city. Pick a city for a calculator with live zone lookup from that ZIP code, then set your store's <a href="/free-shipping-threshold/" class="text-teal-700 dark:text-teal-400 hover:underline font-medium">free shipping threshold</a> around what a typical order actually costs to ship.</p>
-    <ul class="flex flex-wrap gap-2">
-      {cityList.map((c) => (
-        <li><a href={`/shipping/${slug}/${c.slug}/`} class="inline-block px-3 py-1 rounded-full border border-gray-200 dark:border-gray-700 text-xs text-gray-700 dark:text-gray-300 hover:border-teal-500 hover:text-teal-700 dark:hover:text-teal-400">{c.name} ZIP {c.zip}</a></li>
-      ))}
-    </ul>
-  </div>
-)}
-
 <div class="max-w-3xl mb-10">
   <h2 class="text-xl font-bold mb-6">More Shipping Questions  -  {name}</h2>
   <div class="space-y-5">
