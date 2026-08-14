@@ -4,12 +4,10 @@ interface Props {
   abbr: string;
   slug: string;
   regionLabel: string;
-  taxRate: number;
   cities: { name: string; slug: string; zip: string }[];
 }
-const { name, abbr, slug, regionLabel, taxRate, cities } = Astro.props;
+const { name, abbr, slug, regionLabel, cities } = Astro.props;
 const nonContiguous = ['hawaii', 'alaska'].includes(slug);
-const noTax = taxRate === 0;
 const cityList = (cities || []).slice(0, 6);
 ---
 {nonContiguous && (
@@ -24,26 +22,17 @@ const cityList = (cities || []).slice(0, 6);
   </div>
 )}
 
-<div class="max-w-3xl mb-10">
-  <h2 class="text-xl font-bold mb-4">Shopify Shipping from {name}: Tips for 2026</h2>
-  <div class="space-y-4 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-    <p><strong>Use Shopify Shipping discounts.</strong> Merchants selling from {name} get up to 88% off USPS and up to 77% off UPS retail rates through Shopify Shipping  -  well below counter prices, which matters most on longer {regionLabel} routes where every zone bump adds cost.</p>
-    <p><strong>Set a free-shipping threshold that covers your zone.</strong> Most Shopify stores use a $50 - $75 free-shipping minimum. Check what a typical order actually costs to ship from {name} with the <a href="/free-shipping-threshold/" class="text-teal-700 dark:text-teal-400 hover:underline font-medium">free shipping threshold calculator</a> before you lock in a number.</p>
-    <p><strong>{name} sales tax on shipping.</strong> {noTax ? `${name} has no statewide sales tax, so you generally do not collect tax on orders shipped within ${name}  -  one less thing to configure in your Shopify tax settings.` : `${name}'s base statewide sales tax is ${taxRate}%. Whether the shipping charge itself is taxable depends on how you present it on the invoice, so set your Shopify tax rules for ${name} accordingly.`}</p>
-    <p>Sourcing the product before you ship it? <a href="https://supply-rank.com/" class="text-teal-700 dark:text-teal-400 hover:underline font-medium">SupplyRank</a> lists verified wholesale suppliers so your landed cost  -  product plus shipping from {name}  -  stays competitive.</p>
+{cityList.length > 0 && (
+  <div class="max-w-3xl mb-10">
+    <h2 class="text-xl font-bold mb-3">Shipping rates by city in {name}</h2>
+    <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Shipping cost from {name} depends on the USPS zone of your origin ZIP, so rates differ city to city. Pick a city for a calculator with live zone lookup from that ZIP code, then set your store's <a href="/free-shipping-threshold/" class="text-teal-700 dark:text-teal-400 hover:underline font-medium">free shipping threshold</a> around what a typical order actually costs to ship.</p>
+    <ul class="flex flex-wrap gap-2">
+      {cityList.map((c) => (
+        <li><a href={`/shipping/${slug}/${c.slug}/`} class="inline-block px-3 py-1 rounded-full border border-gray-200 dark:border-gray-700 text-xs text-gray-700 dark:text-gray-300 hover:border-teal-500 hover:text-teal-700 dark:hover:text-teal-400">{c.name} ZIP {c.zip}</a></li>
+      ))}
+    </ul>
   </div>
-  {cityList.length > 0 && (
-    <div class="mt-6">
-      <h3 class="font-semibold text-gray-800 dark:text-gray-200 mb-2">Shipping rates by city in {name}</h3>
-      <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Pick a city for a calculator with live USPS zone lookup from that ZIP code:</p>
-      <ul class="flex flex-wrap gap-2">
-        {cityList.map((c) => (
-          <li><a href={`/shipping/${slug}/${c.slug}/`} class="inline-block px-3 py-1 rounded-full border border-gray-200 dark:border-gray-700 text-xs text-gray-700 dark:text-gray-300 hover:border-teal-500 hover:text-teal-700 dark:hover:text-teal-400">{c.name} ZIP {c.zip}</a></li>
-        ))}
-      </ul>
-    </div>
-  )}
-</div>
+)}
 
 <div class="max-w-3xl mb-10">
   <h2 class="text-xl font-bold mb-6">More Shipping Questions  -  {name}</h2>
