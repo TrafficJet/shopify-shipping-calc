@@ -3,7 +3,7 @@ title: "Shopify Store Best Practices to Boost Sales in 2026"
 slug: "shopify-store-best-practices"
 pubDate: 2026-05-02
 description: "Master Shopify best practices for 2026: theme selection, Core Web Vitals, product pages, SEO & checkout optimization. Increase conversions today."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["shopify store best practices"]
 seoTitle: "Shopify Store Best Practices to Boost Sales in 2026 | Guide"
 heroImage: "/images/shopify-store-best-practices/hero.jpg"

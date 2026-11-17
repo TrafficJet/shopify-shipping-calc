@@ -3,7 +3,7 @@ title: "Shopify Theme Mistakes to Avoid in 2026"
 slug: "shopify-theme-mistakes-to-avoid"
 pubDate: 2026-05-04
 description: "Avoid 9 critical Shopify theme mistakes that tank conversions. Learn how to choose themes for speed, mobile UX, and sales—not just looks."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["shopify theme mistakes to avoid"]
 seoTitle: "Shopify Theme Mistakes to Avoid in 2026 | Performance & Design"
 heroImage: "/images/shopify-theme-mistakes-to-avoid/hero.jpg"

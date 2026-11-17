@@ -3,7 +3,7 @@ title: "Shopify Payments Best Practices for 2026"
 slug: "shopify-payments-best-practices"
 pubDate: 2026-05-05
 description: "Master Shopify Payments with setup tips, fraud prevention, checkout optimization & payout strategies. Save on fees and boost conversions in 2026."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["shopify payments best practices"]
 seoTitle: "Shopify Payments Best Practices 2026 | Setup, Fraud Prevention & Optimization"
 heroImage: "/images/shopify-payments-best-practices/hero.jpg"

@@ -3,7 +3,7 @@ title: "Best Shopify Apps for Print on Demand in 2026"
 slug: "best-shopify-apps-for-print-on-demand"
 pubDate: 2026-04-25
 description: "Compare the best Shopify print on demand apps in 2026. Reviews of Printful, Printify, Gelato & more. Pricing, fulfillment speed, and real-world testing insights."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["best shopify apps for print on demand"]
 seoTitle: "Best Shopify Apps for Print on Demand 2026 | Top POD Solutions"
 heroImage: "/images/best-shopify-apps-for-print-on-demand/hero.jpg"

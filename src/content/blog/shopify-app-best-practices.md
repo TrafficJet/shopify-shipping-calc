@@ -3,7 +3,7 @@ title: "Shopify App Best Practices to Boost Your Store in 2026"
 slug: "shopify-app-best-practices"
 pubDate: 2026-05-03
 description: "Proven Shopify app best practices to audit, evaluate, and manage your app stack for better performance, security, and ROI. Start optimizing today."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["shopify app best practices"]
 seoTitle: "Shopify App Best Practices 2026 | Boost Speed & Security"
 heroImage: "/images/shopify-app-best-practices/hero.jpg"

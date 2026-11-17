@@ -3,7 +3,7 @@ title: "Best Free Shopify Theme Tools in 2026"
 slug: "free-shopify-theme-tools"
 pubDate: 2026-05-05
 description: "Discover the best free Shopify theme tools in 2026—built-in editors, third-party apps, and developer utilities. Design & optimize your store without spending extra."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["free shopify theme tools"]
 seoTitle: "Best Free Shopify Theme Tools 2026 | Complete Toolkit"
 heroImage: "/images/free-shopify-theme-tools/hero.jpg"

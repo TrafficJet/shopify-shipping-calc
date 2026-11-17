@@ -3,7 +3,7 @@ title: "Shopify Refund Policy Template: Free & Ready to Use"
 slug: "shopify-refund-policy-template"
 pubDate: 2026-04-24
 description: "Get a free, copy-and-paste Shopify refund policy template. Customize in minutes, reduce chargebacks, and meet legal requirements."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["shopify refund policy template"]
 seoTitle: "Shopify Refund Policy Template: Free & Ready to Use"
 heroImage: "/images/shopify-refund-policy-template/hero.jpg"

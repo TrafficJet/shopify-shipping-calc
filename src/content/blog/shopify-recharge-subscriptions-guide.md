@@ -3,7 +3,7 @@ title: "Shopify Recharge Subscriptions Guide (2026)"
 slug: "shopify-recharge-subscriptions-guide"
 pubDate: 2026-04-25
 description: "Complete Shopify Recharge guide: install, configure, and optimize subscription billing. Learn pricing, setup, portal customization, and retention strategies."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["shopify recharge subscriptions guide"]
 seoTitle: "Shopify Recharge Subscriptions Guide 2026 | Setup & Optimization"
 heroImage: "/images/shopify-recharge-subscriptions-guide/hero.jpg"

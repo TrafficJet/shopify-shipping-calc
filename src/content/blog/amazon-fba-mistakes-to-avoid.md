@@ -3,7 +3,7 @@ title: "Amazon FBA Mistakes to Avoid in 2026"
 slug: "amazon-fba-mistakes-to-avoid"
 pubDate: 2026-04-30
 description: "Learn the 9 most costly Amazon FBA mistakes sellers make and how to avoid them. Save thousands with data-driven product research and fee optimization."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["amazon fba mistakes to avoid"]
 seoTitle: "Amazon FBA Mistakes to Avoid in 2026 | Shopify Shipping Calc"
 heroImage: "/images/amazon-fba-mistakes-to-avoid/hero.jpg"

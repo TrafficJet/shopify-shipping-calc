@@ -3,7 +3,7 @@ title: "Best Free Dropshipping Tools in 2026"
 slug: "free-dropshipping-tools"
 pubDate: 2026-04-29
 description: "Discover the best free dropshipping tools for product research, supplier sourcing, and store building in 2026. Start your ecommerce business with $0 software costs."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["free dropshipping tools"]
 seoTitle: "Free Dropshipping Tools 2026 | $0 Startup Toolkit"
 heroImage: "/images/free-dropshipping-tools/hero.jpg"

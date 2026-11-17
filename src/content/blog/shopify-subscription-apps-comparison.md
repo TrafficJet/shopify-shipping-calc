@@ -3,7 +3,7 @@ title: "Best Shopify Subscription Apps Compared (2026)"
 slug: "shopify-subscription-apps-comparison"
 pubDate: 2026-04-23
 description: "Compare the top Shopify subscription apps for 2026. See pricing, features, fees, and real results to pick the right tool for your store."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["shopify subscription apps comparison"]
 seoTitle: "Best Shopify Subscription Apps Compared (2026)"
 heroImage: "/images/shopify-subscription-apps-comparison/hero.jpg"

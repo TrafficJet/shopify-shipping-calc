@@ -3,7 +3,7 @@ title: "Dropshipping Best Practices That Actually Work in 2026"
 slug: "dropshipping-best-practices"
 pubDate: 2026-04-28
 description: "Master dropshipping in 2026 with proven supplier vetting, pricing strategies, and customer retention tactics. Learn what separates profitable stores from failures."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["dropshipping best practices"]
 seoTitle: "Dropshipping Best Practices 2026: Proven Strategies That Work"
 heroImage: "/images/dropshipping-best-practices/hero.jpg"

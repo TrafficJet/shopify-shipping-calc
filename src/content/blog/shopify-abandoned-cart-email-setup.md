@@ -3,7 +3,7 @@ title: "Shopify Abandoned Cart Email Setup Guide (2026)"
 slug: "shopify-abandoned-cart-email-setup"
 pubDate: 2026-04-23
 description: "Complete guide to setting up Shopify abandoned cart emails. Learn native tools, third-party apps, templates, and strategies to recover lost sales."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["shopify abandoned cart email setup"]
 seoTitle: "Shopify Abandoned Cart Email Setup Guide 2026 | Klaviyo, Omnisend"
 heroImage: "/images/shopify-abandoned-cart-email-setup/hero.jpg"

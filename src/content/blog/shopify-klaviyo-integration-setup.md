@@ -3,7 +3,7 @@ title: "Shopify Klaviyo Integration Setup: Step-by-Step Guide"
 slug: "shopify-klaviyo-integration-setup"
 pubDate: 2026-04-24
 description: "Learn how to connect Klaviyo to Shopify in minutes. Complete setup guide covering installation, data sync, and automated flows for email marketing."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["shopify klaviyo integration setup"]
 seoTitle: "Shopify Klaviyo Integration Setup: Step-by-Step Guide 2026"
 ---

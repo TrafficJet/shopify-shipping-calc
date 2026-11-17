@@ -3,7 +3,7 @@ title: "How to Start an Ecommerce Business in 2026"
 slug: "how-to-ecommerce"
 pubDate: 2026-04-27
 description: "Step-by-step guide to launching a profitable ecommerce business in 2026. Choose your model, find products, pick a platform, and scale with proven strategies."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["how to ecommerce"]
 seoTitle: "How to Start an Ecommerce Business in 2026 | Shopify Shipping Calc"
 heroImage: "/images/how-to-ecommerce/hero.jpg"

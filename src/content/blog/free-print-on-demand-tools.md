@@ -3,7 +3,7 @@ title: "Best Free Print on Demand Tools in 2026"
 slug: "free-print-on-demand-tools"
 pubDate: 2026-04-30
 description: "Discover the best free print on demand tools for 2026. Compare Printify, Printful, Gelato & more. Start your POD business with zero upfront cost."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["free print on demand tools"]
 seoTitle: "Free Print on Demand Tools 2026 | Printify vs Printful"
 heroImage: "/images/free-print-on-demand-tools/hero.jpg"

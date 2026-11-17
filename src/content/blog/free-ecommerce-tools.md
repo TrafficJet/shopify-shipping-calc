@@ -3,7 +3,7 @@ title: "Best Free Ecommerce Tools for 2026"
 slug: "free-ecommerce-tools"
 pubDate: 2026-04-28
 description: "Discover the best free ecommerce tools for store builders, email marketing, analytics & more. Start selling online without spending a dime."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["free ecommerce tools"]
 seoTitle: "Best Free Ecommerce Tools for 2026 | Shopify Shipping Calc"
 heroImage: "/images/free-ecommerce-tools/hero.jpg"

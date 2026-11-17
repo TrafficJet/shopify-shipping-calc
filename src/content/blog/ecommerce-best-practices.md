@@ -3,7 +3,7 @@ title: "Ecommerce Best Practices That Drive Sales in 2026"
 slug: "ecommerce-best-practices"
 pubDate: 2026-04-27
 description: "Master 8 core ecommerce best practices for 2026: site speed, product pages, checkout optimization, mobile design, SEO, personalization & more. Actionable tactics."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["ecommerce best practices"]
 seoTitle: "Ecommerce Best Practices That Drive Sales in 2026 | Shopify Shipping Calc"
 heroImage: "/images/ecommerce-best-practices/hero.jpg"
