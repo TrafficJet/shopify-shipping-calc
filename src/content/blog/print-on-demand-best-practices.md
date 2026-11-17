@@ -3,7 +3,7 @@ title: "Print on Demand Best Practices for 2026"
 slug: "print-on-demand-best-practices"
 pubDate: 2026-04-29
 description: "Master POD in 2026 with proven strategies: choose the right platform, design like a pro, and price for 30–40% margins. Start your profitable store today."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["print on demand best practices"]
 seoTitle: "Print on Demand Best Practices 2026 | Shopify Shipping Calc"
 heroImage: "/images/print-on-demand-best-practices/hero.jpg"

@@ -3,7 +3,7 @@ title: "Shopify Stripe vs Shopify Payments: Which to Use?"
 slug: "shopify-stripe-vs-shopify-payments"
 pubDate: 2026-04-22
 description: "Compare Shopify Stripe vs Shopify Payments in 2026. See real transaction fees, payout speeds, chargeback tools, and which option saves your store more money."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["shopify stripe vs shopify payments"]
 seoTitle: "Shopify Stripe vs Shopify Payments: Which to Use?"
 heroImage: "/images/shopify-stripe-vs-shopify-payments/hero.jpg"

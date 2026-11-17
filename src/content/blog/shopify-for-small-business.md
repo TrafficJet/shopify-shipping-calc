@@ -3,7 +3,7 @@ title: "Shopify for Small Business: Honest 2026 Guide"
 slug: "shopify-for-small-business"
 pubDate: 2026-04-26
 description: "Complete Shopify small business guide for 2026. Real costs, feature breakdown, pros/cons, and whether it fits your US store. See full pricing analysis."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["shopify for small business"]
 seoTitle: "Shopify for Small Business: 2026 Honest Costs & Features Guide"
 heroImage: "/images/shopify-for-small-business/hero.jpg"

@@ -3,7 +3,7 @@ title: "Best Free Shopify App Tools to Grow Your Store"
 slug: "free-shopify-app-tools"
 pubDate: 2026-05-04
 description: "Discover the best free Shopify apps for email marketing, reviews, and more. Grow your store without breaking the budget. See our top picks now."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["free shopify app tools"]
 seoTitle: "Best Free Shopify App Tools to Grow Your Store | Shopify Shipping Calc"
 heroImage: "/images/free-shopify-app-tools/hero.jpg"

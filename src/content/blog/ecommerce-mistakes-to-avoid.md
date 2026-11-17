@@ -3,7 +3,7 @@ title: "Ecommerce Mistakes to Avoid in 2026"
 slug: "ecommerce-mistakes-to-avoid"
 pubDate: 2026-04-27
 description: "Avoid 9 costly ecommerce mistakes in 2026. Fix slow sites, broken checkouts, weak product pages & more. Actionable steps for Shopify & WooCommerce."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["ecommerce mistakes to avoid"]
 seoTitle: "Ecommerce Mistakes to Avoid in 2026 | Shopify Shipping Calc"
 heroImage: "/images/ecommerce-mistakes-to-avoid/hero.jpg"

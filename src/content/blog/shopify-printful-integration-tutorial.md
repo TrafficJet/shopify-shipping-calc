@@ -3,7 +3,7 @@ title: "Shopify Printful Integration Tutorial (2026)"
 slug: "shopify-printful-integration-tutorial"
 pubDate: 2026-04-25
 description: "Learn to connect Printful to Shopify in 30 minutes. Step-by-step tutorial covers app install, product sync, pricing & fulfillment. Start selling POD today."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["shopify printful integration tutorial"]
 seoTitle: "Shopify Printful Integration Tutorial 2026 | Shipping Calc"
 ---

@@ -3,7 +3,7 @@ title: "Shopify Checkout Customization: Complete 2026 Guide"
 slug: "shopify-checkout-customization"
 pubDate: 2026-04-23
 description: "Learn how to customize your Shopify checkout in 2026. From branding to Checkout Extensibility, boost conversions with these proven tactics."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["shopify checkout customization"]
 seoTitle: "Shopify Checkout Customization: Complete 2026 Guide"
 heroImage: "/images/shopify-checkout-customization/hero.jpg"

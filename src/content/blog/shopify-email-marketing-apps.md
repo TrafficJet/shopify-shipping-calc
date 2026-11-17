@@ -3,7 +3,7 @@ title: "Best Shopify Email Marketing Apps in 2026"
 slug: "shopify-email-marketing-apps"
 pubDate: 2026-04-25
 description: "Compare top Shopify email marketing apps in 2026. Pricing, features, and honest reviews for Klaviyo, Omnisend, Shopify Email & more. Find your perfect fit."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["shopify email marketing apps"]
 seoTitle: "Best Shopify Email Marketing Apps 2026 | Top 7 Compared"
 heroImage: "/images/shopify-email-marketing-apps/hero.jpg"

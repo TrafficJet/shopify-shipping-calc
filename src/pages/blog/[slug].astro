@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import CalcCallout from '../../components/CalcCallout.astro';
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
   return posts.map(post => ({ params: { slug: post.slug }, props: { post } }));
@@ -15,8 +16,8 @@ const schema = JSON.stringify({
   "description": post.data.description,
   "url": canonicalUrl,
   "datePublished": post.data.pubDate.toISOString().split('T')[0],
-  "dateModified": post.data.pubDate.toISOString().split('T')[0],
-  "author": { "@type": "Person", "name": post.data.author || "Alex Morgan" },
+  "dateModified": (post.data.updatedDate ?? post.data.pubDate).toISOString().split('T')[0],
+  "author": { "@type": "Person", "name": post.data.author || "Vladislav T." },
   "publisher": { "@type": "Organization", "name": "ShipCalc", "url": "https://shopify-shipping-calc.com" }
 });
 ---
@@ -24,6 +25,7 @@ const schema = JSON.stringify({
   <script type="application/ld+json" set:html={schema} />
   <article class="max-w-3xl mx-auto prose prose-teal prose-lg dark:prose-invert">
     <p class="text-sm text-gray-400 not-prose mb-4">{post.data.pubDate.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})} · By {post.data.author}</p>
+    <CalcCallout title={post.data.title} tags={post.data.tags} />
     <Content />
   </article>
 </Base>

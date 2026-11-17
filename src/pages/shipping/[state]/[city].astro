@@ -1,5 +1,6 @@
 ---
 import Base from "../../../layouts/Base.astro";
+import NextStepBox from "../../../components/NextStepBox.astro";
 import { states, ZONE_MATRIX } from "../../../data/states-cities";
 import { carriers, getRateForZone, compareRates } from "../../../data/carriers-rates";
 import { productCategories } from "../../../data/product-categories";
@@ -14,6 +15,7 @@ const { state: stateSlug, city: citySlug } = Astro.params;
 const stateData = states.find(s => s.slug === stateSlug)!;
 const cityData = stateData.cities.find(c => c.slug === citySlug)!;
 const originRegion = cityData.region;
+const YEAR = new Date().getFullYear();
 
 const regions = ['northeast', 'southeast', 'midwest', 'southwest', 'west'] as const;
 const regionLabels: Record<string, string> = {
@@ -101,8 +103,8 @@ const schema = JSON.stringify({
 });
 ---
 <Base
-  title={`Shipping from ${cityData.name}, ${stateData.abbr} — Rates by Product Type 2026`}
-  description={`Cheapest shipping from ${cityData.name} for every Shopify product category. USPS, UPS, FedEx, DHL rates for clothing, electronics, jewelry, beauty, and 15 more categories. 2026 rates.`}
+  title={`Shipping from ${cityData.name}, ${stateData.abbr} (${YEAR}): Cheapest Rates by Product Type`}
+  description={`Cheapest shipping from ${cityData.name} for every Shopify product category. USPS, UPS, FedEx, DHL rates for clothing, electronics, jewelry, beauty, and 15 more categories. Updated ${YEAR}.`}
   canonicalUrl={`https://shopify-fee-calc.com/shipping/${stateData.slug}/${cityData.slug}/`}
 >
   <script type="application/ld+json" set:html={schema} />
@@ -183,6 +185,13 @@ const schema = JSON.stringify({
       <div id="rates-list" class="space-y-2"></div>
     </div>
   </div>
+
+  <NextStepBox
+    headline={`Ship from ${cityData.name} for less`}
+    body={`Sellers in ${cityData.name} save up to 40% with discounted commercial labels — compare live USPS, UPS & FedEx pricing before you print the next label.`}
+    ctaText="Compare real rates free"
+    utmContent={`city-${stateData.slug}-${cityData.slug}`}
+  />
 
   <!-- ── Cheapest carrier by product category ─────────────────────────────── -->
   <section class="mb-12">

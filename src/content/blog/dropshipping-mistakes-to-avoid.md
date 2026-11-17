@@ -3,7 +3,7 @@ title: "Dropshipping Mistakes to Avoid in 2026"
 slug: "dropshipping-mistakes-to-avoid"
 pubDate: 2026-04-28
 description: "Avoid the 7 most common dropshipping mistakes. Learn supplier vetting, profit margin math, and product validation strategies to build a profitable store."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["dropshipping mistakes to avoid"]
 seoTitle: "Dropshipping Mistakes to Avoid in 2026 | Shopify Shipping Calc"
 heroImage: "/images/dropshipping-mistakes-to-avoid/hero.jpg"

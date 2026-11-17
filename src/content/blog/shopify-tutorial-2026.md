@@ -3,7 +3,7 @@ title: "Shopify Tutorial 2026: Build Your Store Step by Step"
 slug: "shopify-tutorial-2026"
 pubDate: 2026-04-26
 description: "Complete Shopify tutorial 2026 for beginners. Learn to sign up, choose a plan, customize themes, add products, and launch your store with latest features."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["shopify tutorial 2026"]
 seoTitle: "Shopify Tutorial 2026: Build Your Store Step by Step | Shopify Shipping Calc"
 heroImage: "/images/shopify-tutorial-2026/hero.jpg"

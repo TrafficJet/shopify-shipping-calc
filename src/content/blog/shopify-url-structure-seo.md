@@ -3,7 +3,7 @@ title: "Shopify URL Structure SEO: Complete 2026 Guide"
 slug: "shopify-url-structure-seo"
 pubDate: 2026-04-22
 description: "Learn how to optimize Shopify URL structure for SEO. Fix duplicate URLs, structure collections, and boost rankings with our complete 2026 guide."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["shopify url structure seo"]
 seoTitle: "Shopify URL Structure SEO: Complete 2026 Guide | Shopify Playbook"
 heroImage: "/images/shopify-url-structure-seo/hero.jpg"

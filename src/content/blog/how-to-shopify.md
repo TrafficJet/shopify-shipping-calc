@@ -3,7 +3,7 @@ title: "How to Use Shopify: Complete Beginner's Guide 2026"
 slug: "how-to-shopify"
 pubDate: 2026-04-26
 description: "Learn how to use Shopify in 2026. Step-by-step guide to set up your store, add products, process payments, and make your first sale. No coding required."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["how to shopify"]
 seoTitle: "How to Use Shopify: Complete Beginner's Guide 2026"
 heroImage: "/images/how-to-shopify/hero.jpg"

@@ -3,7 +3,7 @@ title: "Best Free Amazon FBA Tools in 2026"
 slug: "free-amazon-fba-tools"
 pubDate: 2026-05-01
 description: "Discover the top free Amazon FBA tools for product research, keywords, and profit calculations. Save money without sacrificing data quality."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["free amazon fba tools"]
 seoTitle: "Best Free Amazon FBA Tools 2026 | No-Cost Software"
 ---

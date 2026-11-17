@@ -3,7 +3,7 @@ title: "Online Store Mistakes to Avoid in 2026"
 slug: "online-store-mistakes-to-avoid"
 pubDate: 2026-05-01
 description: "Avoid 8 critical e-commerce mistakes that cause 90% of online stores to fail. Get actionable fixes for speed, checkout, and SEO."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["online store mistakes to avoid"]
 seoTitle: "Online Store Mistakes to Avoid in 2026 | Shopify Shipping Calc"
 heroImage: "/images/online-store-mistakes-to-avoid/hero.jpg"

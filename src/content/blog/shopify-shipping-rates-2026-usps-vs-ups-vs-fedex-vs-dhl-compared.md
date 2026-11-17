@@ -3,7 +3,7 @@ title: "Shopify Shipping Rates 2026: USPS vs UPS vs FedEx vs DHL"
 slug: "shopify-shipping-rates-2026-usps-vs-ups-vs-fedex-vs-dhl-compared"
 pubDate: 2026-04-20
 description: "Compare 2026 Shopify shipping rates for USPS, UPS, FedEx, and DHL. See pricing tables, discounts by plan tier, and which carrier saves you money."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["Shopify Shipping Rates 2026: USPS vs UPS vs FedEx vs DHL Compared"]
 seoTitle: "Shopify Shipping Rates 2026: USPS vs UPS vs FedEx vs DHL | Compare Carriers"
 ---

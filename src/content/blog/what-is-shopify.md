@@ -3,7 +3,7 @@ title: "What Is Shopify? Plain-English Guide for 2026"
 slug: "what-is-shopify"
 pubDate: 2026-04-26
 description: "Learn what Shopify is, how it works, pricing plans in 2026, and key features. Complete guide to building your online store—no coding required."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["what is shopify"]
 seoTitle: "What Is Shopify? Plain-English Guide for 2026"
 heroImage: "/images/what-is-shopify/hero.jpg"

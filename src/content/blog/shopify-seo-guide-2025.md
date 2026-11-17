@@ -3,7 +3,7 @@ title: "Shopify SEO Guide 2025: Rank Higher & Sell More"
 slug: "shopify-seo-guide-2025"
 pubDate: 2026-04-21
 description: "Master Shopify SEO with technical fixes, keyword strategies & link building. Increase organic traffic and sales with our complete 2025 guide."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["shopify seo guide 2025"]
 seoTitle: "Shopify SEO Guide 2025: Rank Higher & Sell More | Playbook"
 ---

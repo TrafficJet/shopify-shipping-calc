@@ -3,7 +3,7 @@ title: "Shopify App Mistakes to Avoid in 2026"
 slug: "shopify-app-mistakes-to-avoid"
 pubDate: 2026-05-03
 description: "Learn the 8 most common Shopify app mistakes costing merchants real money in 2026. Avoid bloat, slow pages, and security risks—expert fixes included."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["shopify app mistakes to avoid"]
 seoTitle: "Shopify App Mistakes to Avoid in 2026 | Shopify Shipping Calc"
 heroImage: "/images/shopify-app-mistakes-to-avoid/hero.jpg"

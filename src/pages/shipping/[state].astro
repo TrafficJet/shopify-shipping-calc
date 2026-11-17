@@ -1,6 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
 import StateShippingExtra from "../../components/StateShippingExtra.astro";
+import NextStepBox from "../../components/NextStepBox.astro";
 import { states, ZONE_MATRIX } from "../../data/states-cities";
 import { carriers } from "../../data/carriers-rates";
 
@@ -17,6 +18,7 @@ const regionLabels: Record<string, string> = {
   midwest: 'Midwest', southwest: 'Southwest', west: 'West',
 };
 const regionLabel = regionLabels[originRegion] ?? originRegion;
+const YEAR = new Date().getFullYear();
 
 // Nearby states (same region, first 5)
 const nearbyStates = states
@@ -67,7 +69,7 @@ const softwareSchema = JSON.stringify({
   "@type": "SoftwareApplication",
   "name": `${stateData.name} Shipping Rate Calculator`,
   "url": `https://shopify-shipping-calc.com/shipping/${stateData.slug}/`,
-  "description": `Free ${stateData.name} shipping rate calculator. Compare USPS, UPS, FedEx, and DHL rates for packages shipped from ${stateData.abbr}. Zone-based pricing updated for 2026.`,
+  "description": `Free ${stateData.name} shipping rate calculator. Compare USPS, UPS, FedEx, and DHL rates for packages shipped from ${stateData.abbr}. Zone-based pricing updated for ${YEAR}.`,
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Web",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
@@ -139,8 +141,8 @@ const breadcrumbSchema = JSON.stringify({
 });
 ---
 <Base
-  title={`${stateData.name} Shipping Rates 2026 — USPS, UPS, FedEx & DHL Calculator`}
-  description={`Compare USPS, UPS, FedEx, and DHL shipping rates from ${stateData.name} (${stateData.abbr}). Free calculator for any package weight. Zone ${selfZone} to Zone ${Math.max(...Object.values(ZONE_MATRIX[originRegion]))} rates updated 2026.`}
+  title={`${stateData.name} Shipping Rates (${YEAR}): USPS vs UPS vs FedEx from $${getRate(uspsGA, 16, selfZone)?.toFixed(2)}`}
+  description={`Compare USPS, UPS, FedEx, and DHL shipping rates from ${stateData.name} (${stateData.abbr}). Free calculator for any package weight. Zone ${selfZone} to Zone ${Math.max(...Object.values(ZONE_MATRIX[originRegion]))} rates updated ${YEAR}.`}
   canonicalUrl={`https://shopify-shipping-calc.com/shipping/${stateData.slug}/`}
   noWebAppSchema={true}
 >
@@ -157,7 +159,7 @@ const breadcrumbSchema = JSON.stringify({
     <span class="text-gray-800 dark:text-gray-200">{stateData.name}</span>
   </nav>
 
-  <h1 class="text-3xl font-bold mb-3">{stateData.name} ({stateData.abbr}) Shipping Rates 2026</h1>
+  <h1 class="text-3xl font-bold mb-3">{stateData.name} ({stateData.abbr}) Shipping Rates {YEAR}</h1>
   <p class="text-gray-600 dark:text-gray-400 mb-2 text-lg max-w-3xl">
     Compare USPS, UPS, FedEx, and DHL shipping rates from {stateData.name}. Free calculator for any package weight — updated for 2026 commercial rates.
   </p>
@@ -224,6 +226,13 @@ const breadcrumbSchema = JSON.stringify({
       </div>
     </div>
     <p id="calcZone" class="text-xs text-gray-400 dark:text-gray-500 mt-3">Select destination and click Calculate to see rates.</p>
+
+    <NextStepBox
+      headline="Stop overpaying on every label"
+      body={`Carriers change rates constantly. Sellers shipping from ${stateData.name} save up to 40% with discounted commercial labels — compare live USPS, UPS & FedEx pricing in one place.`}
+      ctaText="Compare real rates free"
+      utmContent={`state-${stateData.slug}`}
+    />
   </div>
 
   <!-- Cheapest carrier callout per destination -->

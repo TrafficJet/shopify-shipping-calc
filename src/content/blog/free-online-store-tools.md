@@ -3,7 +3,7 @@ title: "Best Free Online Store Tools for 2026"
 slug: "free-online-store-tools"
 pubDate: 2026-05-02
 description: "Discover the best free online store tools for 2026—store builders, design apps, analytics, inventory, and more. Build your ecommerce business without spending."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["free online store tools"]
 seoTitle: "Free Online Store Tools 2026 | Shopify Shipping Calc"
 heroImage: "/images/free-online-store-tools/hero.jpg"

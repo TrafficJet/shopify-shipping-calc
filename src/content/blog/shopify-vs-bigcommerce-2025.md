@@ -3,7 +3,7 @@ title: "Shopify vs BigCommerce 2025: Which Platform Wins?"
 slug: "shopify-vs-bigcommerce-2025"
 pubDate: 2026-04-23
 description: "Compare Shopify and BigCommerce in 2025. Pricing, features, SEO, scalability. Which platform wins for your store?"
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["shopify vs bigcommerce 2025"]
 seoTitle: "Shopify vs BigCommerce 2025 | Platform Comparison"
 heroImage: "/images/shopify-vs-bigcommerce-2025/hero.jpg"

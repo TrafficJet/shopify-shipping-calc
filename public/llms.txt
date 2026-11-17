@@ -1,0 +1,24 @@
+# Shopify-Shipping-Calc.com
+
+> Free shipping calculators for e-commerce sellers: compare USPS, UPS, FedEx and DHL rates from any US state or major city, calculate dimensional weight, find your free-shipping threshold, and estimate China import shipping. 280+ cities, 50 states, zone-based commercial rates. No signup.
+
+## Calculators
+- [Shipping Rate Calculator](https://shopify-shipping-calc.com/shipping-calculator/): Compare carrier rates for any package weight and destination
+- [Dimensional Weight Calculator](https://shopify-shipping-calc.com/dimensional-weight/): Check DIM pricing (L×W×H÷139) for UPS/FedEx
+- [Free Shipping Threshold Calculator](https://shopify-shipping-calc.com/free-shipping-threshold/): Find the profitable minimum order value
+- [Carrier Comparison](https://shopify-shipping-calc.com/carrier-comparison/): USPS vs UPS vs FedEx vs DHL side by side
+- [Profit Margin Calculator](https://shopify-shipping-calc.com/profit-margin/): True margin after shipping and fees
+- [Break-Even Calculator](https://shopify-shipping-calc.com/break-even/): Units needed to cover costs
+- [China Shipping Costs](https://shopify-shipping-calc.com/china-shipping/): Sea, air and express rates from China by destination country
+
+## Rates by Location
+- [Shipping Rates by State](https://shopify-shipping-calc.com/shipping/): All 50 US states, zone-based carrier rates with city-level pages
+
+## Key Facts
+- Rates are zone-based approximations of current commercial (discounted) carrier pricing, updated for the current year
+- USPS Ground Advantage does not apply dimensional-weight pricing for packages under 1 cubic foot
+- UPS and FedEx apply DIM pricing: L×W×H ÷ 139
+- Data is processed in the browser; the tools are free with no signup
+
+## Blog
+- [Shipping & E-commerce Guides](https://shopify-shipping-calc.com/blog/): Practical guides on Shopify shipping, fulfillment and carrier choice

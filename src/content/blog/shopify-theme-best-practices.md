@@ -3,7 +3,7 @@ title: "Shopify Theme Best Practices for 2026"
 slug: "shopify-theme-best-practices"
 pubDate: 2026-05-04
 description: "Master Shopify theme best practices for 2026: optimize speed, mobile UX, accessibility & Core Web Vitals. Boost conversions & organic traffic today."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["shopify theme best practices"]
 seoTitle: "Shopify Theme Best Practices 2026 | Performance & Speed Guide"
 heroImage: "/images/shopify-theme-best-practices/hero.jpg"

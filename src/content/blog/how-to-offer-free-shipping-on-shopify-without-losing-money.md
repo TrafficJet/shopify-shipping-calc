@@ -3,7 +3,7 @@ title: "Free Shipping on Shopify Without Losing Money (2026)"
 slug: "how-to-offer-free-shipping-on-shopify-without-losing-money"
 pubDate: 2026-04-20
 description: "Learn how to offer free shipping on Shopify while protecting margins. Step-by-step system with real math for thresholds, pricing & carrier strategies."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["How to Offer Free Shipping on Shopify Without Losing Money"]
 seoTitle: "Free Shipping on Shopify Without Losing Money | 2026 Guide"
 ---

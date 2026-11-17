@@ -3,7 +3,7 @@ title: "Shopify Store Mistakes to Avoid in 2026"
 slug: "shopify-store-mistakes-to-avoid"
 pubDate: 2026-05-02
 description: "Discover 10 costly Shopify mistakes draining revenue from US sellers. Get fixes for mobile design, page speed, product descriptions, and checkout optimization."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["shopify store mistakes to avoid"]
 seoTitle: "Shopify Store Mistakes to Avoid in 2026 | Guide"
 heroImage: "/images/shopify-store-mistakes-to-avoid/hero.jpg"

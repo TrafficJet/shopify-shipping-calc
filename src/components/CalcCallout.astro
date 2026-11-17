@@ -1,0 +1,38 @@
+---
+// Blog → money-page router. Picks the most relevant calculator from post tags/title
+// and renders a prefilled callout. One template insert covers every post.
+interface Props {
+  title: string;
+  tags?: string[];
+}
+const { title, tags = [] } = Astro.props;
+const hay = (title + ' ' + tags.join(' ')).toLowerCase();
+
+type Target = { href: string; label: string; blurb: string };
+function pick(): Target {
+  if (/dimensional|dim weight|oversize|bulky/.test(hay))
+    return { href: '/dimensional-weight/', label: 'Dimensional Weight Calculator', blurb: 'Check if DIM pricing makes your package cost more — before the carrier does.' };
+  if (/free shipping|threshold/.test(hay))
+    return { href: '/free-shipping-threshold/', label: 'Free Shipping Threshold Calculator', blurb: 'Find the minimum order value where free shipping still makes you money.' };
+  if (/china|import|alibaba|aliexpress/.test(hay))
+    return { href: '/china-shipping/', label: 'China Shipping Cost Calculator', blurb: 'Compare sea, air and express rates from China by country.' };
+  if (/profit|margin|fee|pricing|price/.test(hay))
+    return { href: '/profit-margin/', label: 'Profit Margin Calculator', blurb: 'See your true margin after shipping, fees and COGS.' };
+  if (/carrier|usps|ups|fedex|dhl|compare/.test(hay))
+    return { href: '/carrier-comparison/', label: 'Carrier Comparison Tool', blurb: 'USPS vs UPS vs FedEx vs DHL on your exact package.' };
+  return { href: '/shipping-calculator/', label: 'Shipping Rate Calculator', blurb: 'Compare real USPS, UPS, FedEx and DHL rates for any package in seconds.' };
+}
+const t = pick();
+---
+<div class="not-prose my-8 p-6 rounded-2xl border-2 border-teal-200 bg-teal-50 dark:bg-teal-950 dark:border-teal-800">
+  <p class="text-xs font-semibold uppercase tracking-wide text-teal-500 mb-1">Free tool</p>
+  <h3 class="text-lg font-bold text-teal-900 dark:text-teal-100 mb-1">
+    <a href={t.href} class="hover:underline">{t.label} →</a>
+  </h3>
+  <p class="text-sm text-teal-800 dark:text-teal-200 mb-3">{t.blurb}</p>
+  <p class="text-sm">
+    <a href={t.href} class="font-semibold text-teal-700 dark:text-teal-300 hover:underline">Open the calculator</a>
+    <span class="mx-2 text-teal-300">·</span>
+    <a href="/shipping/" class="text-teal-700 dark:text-teal-300 hover:underline">Rates from your state</a>
+  </p>
+</div>

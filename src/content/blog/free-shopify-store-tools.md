@@ -3,7 +3,7 @@ title: "Best Free Shopify Store Tools to Grow Sales in 2026"
 slug: "free-shopify-store-tools"
 pubDate: 2026-05-03
 description: "Best free Shopify tools for design, SEO, email, analytics & more. Grow sales without app costs. See which tools work best in 2026."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["free shopify store tools"]
 seoTitle: "Free Shopify Store Tools to Grow Sales in 2026 | Shopify Shipping Calc"
 heroImage: "/images/free-shopify-store-tools/hero.jpg"

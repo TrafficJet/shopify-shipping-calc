@@ -3,7 +3,7 @@ title: "Online Store Best Practices to Boost Sales in 2026"
 slug: "online-store-best-practices"
 pubDate: 2026-05-01
 description: "Master online store best practices for 2026: site speed, product pages, checkout optimization, SEO, fulfillment & retention. Boost sales and conversions."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["online store best practices"]
 seoTitle: "Online Store Best Practices to Boost Sales in 2026 | Shopify Shipping Calc"
 ---

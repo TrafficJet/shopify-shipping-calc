@@ -3,7 +3,7 @@ title: "Amazon FBA Best Practices: 2026 Guide"
 slug: "amazon-fba-best-practices"
 pubDate: 2026-04-30
 description: "Master Amazon FBA best practices in 2026. Learn product selection, inventory management, listing optimization, and pricing strategies to maximize profitability."
-author: "Alex Morgan"
+author: "Vladislav T."
 tags: ["amazon fba best practices"]
 seoTitle: "Amazon FBA Best Practices 2026: Complete Guide for US Sellers"
 heroImage: "/images/amazon-fba-best-practices/hero.jpg"
